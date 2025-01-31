@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Input as AntInput, Button, Space } from 'antd';
 import { EyeOutlined, DownloadOutlined } from '@ant-design/icons';
+import html2canvas from 'html2canvas';
 
 interface InputProps {
-  onSubmit: (repoUrl: string) => void;
+  onSubmit: (url: string) => void;
 }
 
 const Input: React.FC<InputProps> = ({ onSubmit }) => {
@@ -12,6 +13,29 @@ const Input: React.FC<InputProps> = ({ onSubmit }) => {
   const handleSubmit = () => {
     if (repoUrl.trim()) {
       onSubmit(repoUrl.trim());
+    }
+  };
+
+  const handleDownload = async () => {
+    const previewElement = document.querySelector('.app-content > div') as HTMLElement;
+    if (!previewElement) return;
+
+    try {
+      const canvas = await html2canvas(previewElement, {
+        scale: 8,
+        useCORS: true,
+        backgroundColor: null,
+        logging: false,
+        allowTaint: true
+      });
+      const url = canvas.toDataURL('image/png', 1.0);
+      const link = document.createElement('a');
+      const repoName = document.querySelector('.app-content')?.querySelector('h1')?.textContent || 'repo';
+      link.download = `${repoName}.png`;
+      link.href = url;
+      link.click();
+    } catch (error) {
+      console.error('下载图片时出错:', error);
     }
   };
 
@@ -26,7 +50,9 @@ const Input: React.FC<InputProps> = ({ onSubmit }) => {
       <Button type="primary" icon={<EyeOutlined />} onClick={handleSubmit}>
         生成预览
       </Button>
-      <Button icon={<DownloadOutlined />}>下载图片</Button>
+      <Button icon={<DownloadOutlined />} onClick={handleDownload}>
+        下载图片
+      </Button>
     </Space>
   );
 };
