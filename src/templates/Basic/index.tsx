@@ -8,7 +8,6 @@ interface BasicTemplateProps {
   repoForks?: number;
   repoLanguages?: string[];
   authorName?: string;
-  authorAvatar?: string;
   homepage?: string;
 }
 
@@ -19,7 +18,6 @@ export const BasicTemplate: React.FC<BasicTemplateProps> = ({
   repoForks = 0,
   repoLanguages = ['Unknown'],
   authorName,
-  authorAvatar,
   homepage
 }) => {
   return (
