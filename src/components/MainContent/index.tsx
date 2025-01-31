@@ -9,12 +9,23 @@ interface MainContentProps {
   selectedTemplate: string;
   onTemplateSelect: (templateId: string) => void;
   isDarkMode: boolean;
+  repoData: {
+    repoName: string;
+    repoDescription: string;
+    repoStars: number;
+    repoForks: number;
+    repoLanguages: string[];
+    authorName?: string;
+    authorAvatar?: string;
+    homepage?: string;
+  };
 }
 
 const MainContent: React.FC<MainContentProps> = ({
   selectedTemplate,
   onTemplateSelect,
-  isDarkMode
+  isDarkMode,
+  repoData
 }) => {
   return (
     <Layout hasSider>
@@ -28,9 +39,9 @@ const MainContent: React.FC<MainContentProps> = ({
           onTemplateSelect={onTemplateSelect}
         />
       </Sider>
-      <Content className="app-content" style={{ padding: '24px', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ width: '500px', height: '400px' }}>
-          <Preview selectedTemplate={selectedTemplate} />
+      <Content className="app-content" style={{ padding: '24px', minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ width: '500px' }}>
+          <Preview selectedTemplate={selectedTemplate} {...repoData} />
         </div>
       </Content>
     </Layout>

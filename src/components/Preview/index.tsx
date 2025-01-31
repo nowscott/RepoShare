@@ -5,33 +5,50 @@ import CardTemplate from '../../templates/Card';
 
 interface PreviewProps {
   selectedTemplate: string;
+  repoName: string;
+  repoDescription: string;
+  repoStars: number;
+  repoForks: number;
+  repoLanguages: string[];
+  authorName?: string;
+  authorAvatar?: string;
+  homepage?: string;
 }
 
-const Preview: React.FC<PreviewProps> = ({ selectedTemplate }) => {
+const Preview: React.FC<PreviewProps> = ({ selectedTemplate, repoName, repoDescription, repoStars, repoForks, repoLanguages, authorName, authorAvatar, homepage }) => {
   switch (selectedTemplate) {
     case 'basic':
       return <BasicTemplate
-        repoName="RepoShare"
-        repoDescription="一个用于生成 GitHub 仓库预览图的工具，支持多种模板和自定义样式。"
-        repoStars={100}
-        repoForks={20}
-        repoLanguage="TypeScript"
+        repoName={repoName}
+        repoDescription={repoDescription}
+        repoStars={repoStars}
+        repoForks={repoForks}
+        repoLanguages={repoLanguages}
+        authorName={authorName}
+        authorAvatar={authorAvatar}
+        homepage={homepage}
       />;
     case 'dark':
       return <DarkTemplate
-        repoName="RepoShare"
-        repoDescription="一个用于生成 GitHub 仓库预览图的工具，支持多种模板和自定义样式。"
-        repoStars={100}
-        repoForks={20}
-        repoLanguage="TypeScript"
+        repoName={repoName}
+        repoDescription={repoDescription}
+        repoStars={repoStars}
+        repoForks={repoForks}
+        repoLanguages={repoLanguages}
+        authorName={authorName}
+        authorAvatar={authorAvatar}
+        homepage={homepage}
       />;
     case 'card':
       return <CardTemplate
-        repoName="RepoShare"
-        repoDescription="一个用于生成 GitHub 仓库预览图的工具，支持多种模板和自定义样式。"
-        repoStars={100}
-        repoForks={20}
-        repoLanguage="TypeScript"
+        repoName={repoName}
+        repoDescription={repoDescription}
+        repoStars={repoStars}
+        repoForks={repoForks}
+        repoLanguages={repoLanguages}
+        authorName={authorName}
+        authorAvatar={authorAvatar}
+        homepage={homepage}
       />;
     default:
       return <div>未找到对应的模板: {selectedTemplate}</div>;

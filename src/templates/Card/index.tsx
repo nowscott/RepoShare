@@ -6,7 +6,10 @@ interface CardTemplateProps {
   repoDescription?: string;
   repoStars?: number;
   repoForks?: number;
-  repoLanguage?: string;
+  repoLanguages?: string[];
+  authorName?: string;
+  authorAvatar?: string;
+  homepage?: string;
 }
 
 export const CardTemplate: React.FC<CardTemplateProps> = ({
@@ -14,14 +17,18 @@ export const CardTemplate: React.FC<CardTemplateProps> = ({
   repoDescription = 'Repository Description',
   repoStars = 0,
   repoForks = 0,
-  repoLanguage = 'Unknown'
+  repoLanguages = ['Unknown']
 }) => {
   return (
     <div className="card-template">
       <div className="card">
         <div className="card-header">
           <h1 className="repo-name">{repoName}</h1>
-          <div className="language-tag">{repoLanguage}</div>
+          <div className="language-tags">
+            {repoLanguages.map((lang, index) => (
+              <span key={index} className="language-tag">{lang}</span>
+            ))}
+          </div>
         </div>
         <p className="repo-description">{repoDescription}</p>
         <div className="repo-stats">

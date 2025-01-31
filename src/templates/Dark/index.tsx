@@ -6,7 +6,10 @@ interface DarkTemplateProps {
   repoDescription?: string;
   repoStars?: number;
   repoForks?: number;
-  repoLanguage?: string;
+  repoLanguages?: string[];
+  authorName?: string;
+  authorAvatar?: string;
+  homepage?: string;
 }
 
 export const DarkTemplate: React.FC<DarkTemplateProps> = ({
@@ -14,7 +17,7 @@ export const DarkTemplate: React.FC<DarkTemplateProps> = ({
   repoDescription = 'Repository Description',
   repoStars = 0,
   repoForks = 0,
-  repoLanguage = 'Unknown'
+  repoLanguages = ['Unknown']
 }) => {
   return (
     <div className="dark-template">
@@ -30,8 +33,10 @@ export const DarkTemplate: React.FC<DarkTemplateProps> = ({
             <span className="stat-value">{repoForks}</span>
             <span className="stat-label">Forks</span>
           </div>
-          <div className="stat-item language">
-            <span className="stat-value">{repoLanguage}</span>
+          <div className="language-tags">
+            {repoLanguages.map((lang, index) => (
+              <span key={index} className="language-tag">{lang}</span>
+            ))}
           </div>
         </div>
       </div>

@@ -53,12 +53,19 @@
   color: #8b949e;
 }
 
-.dark-template .language {
-  padding: 0.5rem 1rem;
-  background-color: #2ea043;
-  border-radius: 1rem;
+.dark-template .language-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
 }
 
-.dark-template .language .stat-value {
-  color: #ffffff;
+.dark-template .language-tag {
+  background-color: #1f6feb;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  display: inline-block;
+  font-weight: 500;
 }
