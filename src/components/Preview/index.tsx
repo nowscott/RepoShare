@@ -25,7 +25,6 @@ const Preview: React.FC<PreviewProps> = ({ selectedTemplate, repoName, repoDescr
         repoForks={repoForks}
         repoLanguages={repoLanguages}
         authorName={authorName}
-        authorAvatar={authorAvatar}
         homepage={homepage}
       />;
     case 'dark':
