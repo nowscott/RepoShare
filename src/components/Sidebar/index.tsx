@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { LayoutOutlined } from '@ant-design/icons';
+import { LayoutOutlined, BgColorsOutlined, CreditCardOutlined } from '@ant-design/icons';
 
 interface SidebarProps {
   selectedTemplate: string;
@@ -8,9 +8,10 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ selectedTemplate, onTemplateSelect }) => {
-  // 临时模板数据，后续将从模板系统中获取
   const templates = [
     { id: 'basic', name: '基础模板', icon: <LayoutOutlined /> },
+    { id: 'dark', name: '深色模板', icon: <BgColorsOutlined /> },
+    { id: 'card', name: '卡片模板', icon: <CreditCardOutlined /> },
   ];
 
   const items = [

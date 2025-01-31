@@ -28,8 +28,10 @@ const MainContent: React.FC<MainContentProps> = ({
           onTemplateSelect={onTemplateSelect}
         />
       </Sider>
-      <Content className="app-content">
-        <Preview selectedTemplate={selectedTemplate} />
+      <Content className="app-content" style={{ padding: '24px', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ width: '500px', height: '400px' }}>
+          <Preview selectedTemplate={selectedTemplate} />
+        </div>
       </Content>
     </Layout>
   );
