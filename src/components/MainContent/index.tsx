@@ -40,7 +40,7 @@ const MainContent: React.FC<MainContentProps> = ({
         />
       </Sider>
       <Content className="app-content" style={{ padding: '24px', minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ width: '500px', minWidth: '500px', flex: '0 0 500px' }}>
+        <div style={{ width: '750px', minWidth: '750px', flex: '0 0 750px' }}>
           <Preview selectedTemplate={selectedTemplate} {...repoData} />
         </div>
       </Content>

@@ -3,31 +3,32 @@
 .basic-template {
   width: 100%;
   height: 100%;
-  min-height: 300px;
-  padding: 20px;
+  min-height: 420px;
+  padding: 30px;
   background: linear-gradient(135deg, #f5f7fa 0%, #003153 100%);
-  border-radius: 8px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 49, 83, 0.15);
   font-family: '汇文明朝体', serif;
   .author-info {
     display: flex;
     margin: 0;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
   }
   
-  .author-details {
+  .author-info {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #98b7d7;
   }
   
   .author-name {
-    font-size: 0.8rem;
-    color: #98b7d7;
     font-weight: 600;
     margin: 0;
   }
@@ -35,16 +36,16 @@
   .repo-homepage {
     color: #3498db;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.1rem;
     display: inline-block;
-    padding: 0px 10px;
+    padding: 0;
     border-radius: 4px;
     transition: all 0.3s ease;
   }
 }
 
 .repo-name {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   color: #2c3e50;
   margin: 0;
   font-weight: bold;
@@ -52,7 +53,7 @@
 
 .repo-description {
   color: #1f1d63;
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 1.5;
   margin: 0;
   flex-grow: 1;
@@ -98,15 +99,4 @@
   font-size: 13px;
   display: inline-block;
   font-weight: 500;
-}
-
-.author-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.copyright {
-  font-size: 0.8rem;
-  color: #98b7d7;
 }

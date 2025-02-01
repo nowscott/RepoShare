@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit }) => {
       >
         RepoShare
       </Title>
-      <div style={{ marginLeft: 'auto', flex: '0 1 400px' }}>
+      <div style={{ marginLeft: 'auto', flex: '0 1 420px' }}>
         <Input onSubmit={onSubmit} />
       </div>
     </AntHeader>
