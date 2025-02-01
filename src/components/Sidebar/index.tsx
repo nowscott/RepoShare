@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { LayoutOutlined, BgColorsOutlined, CreditCardOutlined } from '@ant-design/icons';
+import { LayoutOutlined, BgColorsOutlined, CreditCardOutlined, AppstoreOutlined, CrownOutlined } from '@ant-design/icons';
 
 interface SidebarProps {
   selectedTemplate: string;
@@ -12,6 +12,8 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedTemplate, onTemplateSelect })
     { id: 'basic', name: '基础模板', icon: <LayoutOutlined /> },
     { id: 'dark', name: '深色模板', icon: <BgColorsOutlined /> },
     { id: 'card', name: '卡片模板', icon: <CreditCardOutlined /> },
+    { id: 'modern', name: '现代模板', icon: <AppstoreOutlined /> },
+    { id: 'elegant', name: '优雅模板', icon: <CrownOutlined /> },
   ];
 
   const items = [

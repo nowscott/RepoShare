@@ -17,7 +17,10 @@ export const CardTemplate: React.FC<CardTemplateProps> = ({
   repoDescription = 'Repository Description',
   repoStars = 0,
   repoForks = 0,
-  repoLanguages = ['Unknown']
+  repoLanguages = ['Unknown'],
+  authorName,
+  authorAvatar,
+  homepage
 }) => {
   return (
     <div className="card-template">
@@ -40,6 +43,21 @@ export const CardTemplate: React.FC<CardTemplateProps> = ({
             <span className="stat-icon">⑂</span>
             <span className="stat-value">{repoForks}</span>
           </div>
+        </div>
+        <div className="card-footer">
+          {homepage && (
+            <a href={homepage} target="_blank" rel="noopener noreferrer" className="homepage-link">
+              {homepage}
+            </a>
+          )}
+          {authorName && (
+            <div className="author-info">
+              {authorAvatar && (
+                <img src={authorAvatar} alt={authorName} className="author-avatar" />
+              )}
+              <span className="author-name">{authorName}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

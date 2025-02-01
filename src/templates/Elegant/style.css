@@ -1,0 +1,134 @@
+@import url('https://chinese-fonts-cdn.deno.dev/packages/jhlst/dist/京華老宋体v1_007/result.css');
+
+.elegant-template {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  padding: 40px;
+  background: linear-gradient(135deg, #fdfbf9 0%, #f5e6d3 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: '京華老宋体v1_007', serif;
+}
+
+.elegant-template .content-container {
+  width: 100%;
+  max-width: 800px;
+  background: #ffffff;
+  border: 1px solid rgba(210, 180, 140, 0.2);
+  border-radius: 16px;
+  padding: 48px;
+  box-shadow: 0 10px 30px rgba(210, 180, 140, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.elegant-template .content-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #d2b48c 0%, #e8d5b7 100%);
+}
+
+.elegant-template .main-content {
+  margin-bottom: 32px;
+}
+
+.elegant-template .repo-name {
+  font-size: 2.8rem;
+  color: #8b4513;
+  margin: 0 0 24px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.elegant-template .repo-description {
+  font-size: 1.2rem;
+  color: #6b4423;
+  line-height: 1.8;
+  margin: 0 0 40px;
+  letter-spacing: 0.02em;
+}
+
+.elegant-template .stats-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-top: 1px solid rgba(139, 69, 19, 0.1);
+  border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+.elegant-template .stat-group {
+  display: flex;
+  gap: 48px;
+}
+
+.elegant-template .stat-item {
+  text-align: center;
+}
+
+.elegant-template .stat-value {
+  font-size: 2rem;
+  color: #8b4513;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.elegant-template .stat-label {
+  font-size: 0.9rem;
+  color: #b87333;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.elegant-template .languages-section {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.elegant-template .language-tag {
+  padding: 6px 16px;
+  background: rgba(139, 69, 19, 0.1);
+  color: #8b4513;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+.elegant-template .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.elegant-template .homepage-link {
+  color: #8b4513;
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+.elegant-template .author-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.elegant-template .author-prefix {
+  color: #b87333;
+  font-size: 0.9rem;
+}
+
+.elegant-template .author-name {
+  color: #8b4513;
+  font-weight: bold;
+  font-size: 1rem;
+}

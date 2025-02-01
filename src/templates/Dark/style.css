@@ -1,71 +1,151 @@
+@import url('https://chinese-fonts-cdn.deno.dev/packages/mzxst/dist/MZPXorig/result.css');
+
 .dark-template {
   width: 100%;
   height: 100%;
-  aspect-ratio: 5/4;
-  background-color: #1a1a1a;
+  min-height: 420px;
+  padding: 40px;
+  background: linear-gradient(150deg, #0d1117 0%, #161b22 100%);
   color: #ffffff;
-  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-family: 'MuzaiPixel', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
 }
 
 .dark-template .content {
   width: 100%;
   max-width: 800px;
+  background: rgba(13, 17, 23, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .dark-template .repo-name {
-  font-size: 2.5rem;
-  margin: 0 0 1rem;
+  font-size: 3rem;
+  margin: 0 0 1.5rem;
   color: #58a6ff;
+  text-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .dark-template .repo-description {
-  font-size: 1.2rem;
-  margin: 0 0 2rem;
+  font-size: 1.3rem;
+  margin: 0 0 2.5rem;
   color: #8b949e;
-  line-height: 1.5;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
 }
 
 .dark-template .repo-stats {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
   align-items: center;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .dark-template .stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
 }
 
 .dark-template .stat-value {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #58a6ff;
+  text-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
 }
 
 .dark-template .stat-label {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .dark-template .language-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 5px;
+  gap: 12px;
+  margin-top: 2rem;
 }
 
 .dark-template .language-tag {
-  background-color: #1f6feb;
-  color: white;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 13px;
-  display: inline-block;
+  background: rgba(31, 111, 235, 0.2);
+  color: #58a6ff;
+  padding: 8px 20px;
+  border-radius: 16px;
+  font-size: 0.95rem;
   font-weight: 500;
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.dark-template .language-tag:hover {
+  background: rgba(31, 111, 235, 0.3);
+  border-color: rgba(88, 166, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.dark-template .footer {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.dark-template .homepage-link {
+  color: #58a6ff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.dark-template .homepage-link:hover {
+  color: #79b6ff;
+  text-decoration: underline;
+}
+
+.dark-template .author-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dark-template .author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(88, 166, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.dark-template .author-avatar:hover {
+  border-color: rgba(88, 166, 255, 0.6);
+  transform: scale(1.05);
+}
+
+.dark-template .author-name {
+  color: #8b949e;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.dark-template .author-name:hover {
+  color: #58a6ff;
 }

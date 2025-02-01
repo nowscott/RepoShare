@@ -17,7 +17,10 @@ export const DarkTemplate: React.FC<DarkTemplateProps> = ({
   repoDescription = 'Repository Description',
   repoStars = 0,
   repoForks = 0,
-  repoLanguages = ['Unknown']
+  repoLanguages = ['Unknown'],
+  authorName,
+  authorAvatar,
+  homepage
 }) => {
   return (
     <div className="dark-template">
@@ -38,6 +41,21 @@ export const DarkTemplate: React.FC<DarkTemplateProps> = ({
               <span key={index} className="language-tag">{lang}</span>
             ))}
           </div>
+        </div>
+        <div className="footer">
+          {homepage && (
+            <a href={homepage} target="_blank" rel="noopener noreferrer" className="homepage-link">
+              {homepage}
+            </a>
+          )}
+          {authorName && (
+            <div className="author-info">
+              {authorAvatar && (
+                <img src={authorAvatar} alt={authorName} className="author-avatar" />
+              )}
+              <span className="author-name">{authorName}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
