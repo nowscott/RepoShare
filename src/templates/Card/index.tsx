@@ -10,6 +10,11 @@ interface CardTemplateProps {
   authorName?: string;
   authorAvatar?: string;
   homepage?: string;
+  showStars?: boolean;
+  showForks?: boolean;
+  showHomepage?: boolean;
+  showAuthorAvatar?: boolean;
+  showAuthorName?: boolean;
 }
 
 export const CardTemplate: React.FC<CardTemplateProps> = ({
@@ -20,7 +25,12 @@ export const CardTemplate: React.FC<CardTemplateProps> = ({
   repoLanguages = ['Unknown'],
   authorName,
   authorAvatar,
-  homepage
+  homepage,
+  showStars = true,
+  showForks = true,
+  showHomepage = true,
+  showAuthorAvatar = true,
+  showAuthorName = true
 }) => {
   return (
     <div className="card-template">
@@ -35,24 +45,28 @@ export const CardTemplate: React.FC<CardTemplateProps> = ({
         </div>
         <p className="repo-description">{repoDescription}</p>
         <div className="repo-stats">
-          <div className="stat-item">
-            <span className="stat-icon">★</span>
-            <span className="stat-value">{repoStars}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-icon">⑂</span>
-            <span className="stat-value">{repoForks}</span>
-          </div>
+          {showStars && (
+            <div className="stat-item">
+              <span className="stat-icon">★</span>
+              <span className="stat-value">{repoStars}</span>
+            </div>
+          )}
+          {showForks && (
+            <div className="stat-item">
+              <span className="stat-icon">⑂</span>
+              <span className="stat-value">{repoForks}</span>
+            </div>
+          )}
         </div>
         <div className="card-footer">
-          {homepage && (
+          {showHomepage && homepage && (
             <a href={homepage} target="_blank" rel="noopener noreferrer" className="homepage-link">
               {homepage}
             </a>
           )}
-          {authorName && (
+          {showAuthorName && authorName && (
             <div className="author-info">
-              {authorAvatar && (
+              {showAuthorAvatar && authorAvatar && (
                 <img src={authorAvatar} alt={authorName} className="author-avatar" />
               )}
               <span className="author-name">{authorName}</span>

@@ -18,7 +18,7 @@
   background: #ffffff;
   border: 1px solid rgba(210, 180, 140, 0.2);
   border-radius: 16px;
-  padding: 48px;
+  padding: 32px;
   box-shadow: 0 10px 30px rgba(210, 180, 140, 0.1);
   position: relative;
   overflow: hidden;
@@ -58,9 +58,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 0;
-  border-top: 1px solid rgba(139, 69, 19, 0.1);
-  border-bottom: 1px solid rgba(139, 69, 19, 0.1);
 }
 
 .elegant-template .stat-group {
@@ -103,12 +100,13 @@
 
 .elegant-template .footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 32px;
 }
 
 .elegant-template .homepage-link {
+  margin-right: auto;
   color: #8b4513;
   text-decoration: none;
   font-size: 1rem;

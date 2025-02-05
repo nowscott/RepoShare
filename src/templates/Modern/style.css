@@ -16,7 +16,7 @@
 .modern-template .content-wrapper {
   width: 100%;
   max-width: 800px;
-  background: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(120deg, #e0e7ff 0%, #f6f8fa 100%);
   backdrop-filter: blur(10px);
   border-radius: 24px;
   padding: 40px;

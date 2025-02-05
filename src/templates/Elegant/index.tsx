@@ -9,6 +9,10 @@ interface ElegantTemplateProps {
   repoLanguages?: string[];
   authorName?: string;
   homepage?: string;
+  showStars?: boolean;
+  showForks?: boolean;
+  showHomepage?: boolean;
+  showAuthorName?: boolean;
 }
 
 export const ElegantTemplate: React.FC<ElegantTemplateProps> = ({
@@ -18,7 +22,11 @@ export const ElegantTemplate: React.FC<ElegantTemplateProps> = ({
   repoForks = 0,
   repoLanguages = ['Unknown'],
   authorName,
-  homepage
+  homepage,
+  showStars = true,
+  showForks = true,
+  showHomepage = true,
+  showAuthorName = true
 }) => {
   return (
     <div className="elegant-template">
@@ -28,14 +36,18 @@ export const ElegantTemplate: React.FC<ElegantTemplateProps> = ({
           <p className="repo-description">{repoDescription}</p>
           <div className="stats-section">
             <div className="stat-group">
-              <div className="stat-item">
-                <div className="stat-value">{repoStars}</div>
-                <div className="stat-label">Stars</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-value">{repoForks}</div>
-                <div className="stat-label">Forks</div>
-              </div>
+              {showStars && (
+                <div className="stat-item">
+                  <div className="stat-value">{repoStars}</div>
+                  <div className="stat-label">Stars</div>
+                </div>
+              )}
+              {showForks && (
+                <div className="stat-item">
+                  <div className="stat-value">{repoForks}</div>
+                  <div className="stat-label">Forks</div>
+                </div>
+              )}
             </div>
             <div className="languages-section">
               {repoLanguages.map((lang, index) => (
@@ -45,12 +57,12 @@ export const ElegantTemplate: React.FC<ElegantTemplateProps> = ({
           </div>
         </div>
         <div className="footer">
-          {homepage && (
+          {showHomepage && homepage && (
             <a href={homepage} target="_blank" rel="noopener noreferrer" className="homepage-link">
               {homepage}
             </a>
           )}
-          {authorName && (
+          {showAuthorName && authorName && (
             <div className="author-info">
               <span className="author-prefix">Created with passion by</span>
               <span className="author-name">{authorName}</span>

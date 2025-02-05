@@ -10,6 +10,11 @@ interface DarkTemplateProps {
   authorName?: string;
   authorAvatar?: string;
   homepage?: string;
+  showStars?: boolean;
+  showForks?: boolean;
+  showHomepage?: boolean;
+  showAuthorAvatar?: boolean;
+  showAuthorName?: boolean;
 }
 
 export const DarkTemplate: React.FC<DarkTemplateProps> = ({
@@ -20,7 +25,12 @@ export const DarkTemplate: React.FC<DarkTemplateProps> = ({
   repoLanguages = ['Unknown'],
   authorName,
   authorAvatar,
-  homepage
+  homepage,
+  showStars = true,
+  showForks = true,
+  showHomepage = true,
+  showAuthorAvatar = true,
+  showAuthorName = true
 }) => {
   return (
     <div className="dark-template">
@@ -28,14 +38,18 @@ export const DarkTemplate: React.FC<DarkTemplateProps> = ({
         <h1 className="repo-name">{repoName}</h1>
         <p className="repo-description">{repoDescription}</p>
         <div className="repo-stats">
-          <div className="stat-item">
-            <span className="stat-value">{repoStars}</span>
-            <span className="stat-label">Stars</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-value">{repoForks}</span>
-            <span className="stat-label">Forks</span>
-          </div>
+          {showStars && (
+            <div className="stat-item">
+              <span className="stat-value">{repoStars}</span>
+              <span className="stat-label">Stars</span>
+            </div>
+          )}
+          {showForks && (
+            <div className="stat-item">
+              <span className="stat-value">{repoForks}</span>
+              <span className="stat-label">Forks</span>
+            </div>
+          )}
           <div className="language-tags">
             {repoLanguages.map((lang, index) => (
               <span key={index} className="language-tag">{lang}</span>
@@ -43,14 +57,14 @@ export const DarkTemplate: React.FC<DarkTemplateProps> = ({
           </div>
         </div>
         <div className="footer">
-          {homepage && (
+          {showHomepage && homepage && (
             <a href={homepage} target="_blank" rel="noopener noreferrer" className="homepage-link">
               {homepage}
             </a>
           )}
-          {authorName && (
+          {showAuthorName && authorName && (
             <div className="author-info">
-              {authorAvatar && (
+              {showAuthorAvatar && authorAvatar && (
                 <img src={authorAvatar} alt={authorName} className="author-avatar" />
               )}
               <span className="author-name">{authorName}</span>

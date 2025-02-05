@@ -15,6 +15,11 @@ interface PreviewProps {
   authorName?: string;
   authorAvatar?: string;
   homepage?: string;
+  showStars: boolean;
+  showForks: boolean;
+  showHomepage: boolean;
+  showAuthorAvatar: boolean;
+  showAuthorName: boolean;
 }
 
 const Preview: React.FC<PreviewProps> = (props) => {
