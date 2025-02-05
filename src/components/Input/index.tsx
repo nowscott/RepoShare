@@ -1,33 +1,44 @@
 import React, { useState } from 'react';
-import { Input as AntInput, Button, Space } from 'antd';
-import { EyeOutlined } from '@ant-design/icons';
+import { Input, Space, Button, message } from 'antd';
+import { RedoOutlined } from '@ant-design/icons';
 
 interface InputProps {
   onSubmit: (url: string) => void;
 }
 
-const Input: React.FC<InputProps> = ({ onSubmit }) => {
+const RepoInput: React.FC<InputProps> = ({ onSubmit }) => {
   const [repoUrl, setRepoUrl] = useState('');
+  const [lastSubmittedUrl, setLastSubmittedUrl] = useState('');
 
   const handleSubmit = () => {
-    if (repoUrl.trim()) {
-      onSubmit(repoUrl.trim());
+    const trimmedUrl = repoUrl.trim();
+    if (trimmedUrl) {
+      if (trimmedUrl === lastSubmittedUrl) {
+        message.info('该仓库已在预览中');
+        return;
+      }
+      setLastSubmittedUrl(trimmedUrl);
+      onSubmit(trimmedUrl);
     }
   };
 
   return (
-    <Space style={{ width: '100%' }}>
-      <AntInput
+    <Space.Compact style={{ minWidth: '260px', maxWidth: '420px', width: 'auto', borderRadius: '24px'}}>
+      <Input
         placeholder="username/repo"
         value={repoUrl}
         onChange={(e) => setRepoUrl(e.target.value)}
-        style={{ flex: 1 }}
+        style={{ borderRadius: '24px 0 0 24px', fontWeight: 'bold', flex: '1 1 auto' }}
+        onPressEnter={handleSubmit}
       />
-      <Button type="primary" icon={<EyeOutlined />} onClick={handleSubmit}>
-        生成预览
-      </Button>
-    </Space>
+      <Button 
+        type="primary" 
+        onClick={handleSubmit} 
+        icon={<RedoOutlined />}
+        style={{ borderRadius: '0 24px 24px 0', flex: '0 0 auto' }}
+      />
+    </Space.Compact>
   );
 };
 
-export default Input;
+export default RepoInput;
