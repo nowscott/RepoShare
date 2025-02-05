@@ -20,7 +20,7 @@ const Input: React.FC<InputProps> = ({ onSubmit }) => {
     const previewElement = document.querySelector('.app-content > div') as HTMLElement;
     if (!previewElement) return;
 
-    try {
+    try {    
       const dataUrl = await domtoimage.toPng(previewElement, {
         height: previewElement.offsetHeight * 8,
         width: previewElement.offsetWidth * 8,
@@ -30,10 +30,6 @@ const Input: React.FC<InputProps> = ({ onSubmit }) => {
           width: `${previewElement.offsetWidth}px`,
           height: `${previewElement.offsetHeight}px`
         },
-        filter: (node) => {
-          // 保留所有样式，包括字体和颜色
-          return true;
-        }
       });
       const link = document.createElement('a');
       const repoName = document.querySelector('.app-content')?.querySelector('h1')?.textContent || 'repo';
