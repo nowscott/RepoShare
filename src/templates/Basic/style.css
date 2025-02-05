@@ -13,7 +13,6 @@
 
 .basic-template .content-wrapper {
   backdrop-filter: blur(10px);
-  border-radius: 12px;
   padding: 32px;
   background: linear-gradient(135deg, #f5f7fa 0%, #003153 100%);
   border-radius: 20px;
@@ -31,13 +30,11 @@
   justify-content: center;
   font-size: 0.8rem;
   color: #78b4dc;
-  margin: 0;
   gap: 6px;
 }
 
 .basic-template .author-name {
   font-weight: 600;
-  margin: 0;
   color: #78b4dc;
 }
 
@@ -45,7 +42,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -60,12 +56,11 @@
   color: #78b4dc;
   text-decoration: none;
   font-size: 1.1rem;
-  padding: 0;
   pointer-events: none;
 }
 
 .basic-template .repo-description {
-  color: #1f1d63;
+  color: #2c3e50;
   font-size: 1.2rem;
   line-height: 1.5;
   margin: 0;
@@ -74,9 +69,14 @@
 
 .basic-template .repo-stats {
   display: flex;
-  gap: 30px;
+  justify-content: space-between;
   padding-top: 24px;
   border-top: 2px solid rgba(44, 62, 80, 0.1);
+}
+
+.basic-template .stats-group {
+  display: flex;
+  gap: 30px;
 }
 
 .basic-template .stat-item {
@@ -87,7 +87,7 @@
 
 .basic-template .stat-label {
   font-size: 0.9rem;
-  color: rgba(0, 49, 83, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
 }
 
@@ -106,7 +106,7 @@
 
 .basic-template .language-tag {
   background-color: #a42423;
-  color: #ffbfb0;
+  color: #2c3e50;
   padding: 4px 10px;
   border-radius: 12px;
   font-size: 13px;

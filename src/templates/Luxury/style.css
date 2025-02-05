@@ -120,12 +120,6 @@
   transition: all 0.3s ease;
 }
 
-.luxury-template .language-tag:hover {
-  background: rgba(255, 215, 0, 0.15);
-  border-color: rgba(255, 215, 0, 0.3);
-  transform: translateY(-2px);
-}
-
 .luxury-template .author-info {
   display: flex;
   align-items: center;

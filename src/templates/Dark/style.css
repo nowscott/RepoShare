@@ -91,12 +91,6 @@
   transition: all 0.3s ease;
 }
 
-.dark-template .language-tag:hover {
-  background: rgba(31, 111, 235, 0.3);
-  border-color: rgba(88, 166, 255, 0.5);
-  transform: translateY(-2px);
-}
-
 .dark-template .footer {
   margin-top: 2.5rem;
   display: flex;
@@ -116,11 +110,6 @@
   transition: all 0.3s ease;
 }
 
-.dark-template .homepage-link:hover {
-  color: #79b6ff;
-  text-decoration: underline;
-}
-
 .dark-template .author-info {
   display: flex;
   align-items: center;
@@ -136,18 +125,9 @@
   transition: all 0.3s ease;
 }
 
-.dark-template .author-avatar:hover {
-  border-color: rgba(88, 166, 255, 0.6);
-  transform: scale(1.05);
-}
-
 .dark-template .author-name {
   color: #ffffff;
   font-size: 1.1rem;
   font-weight: 500;
   transition: color 0.3s ease;
-}
-
-.dark-template .author-name:hover {
-  color: #58a6ff;
 }

@@ -28,18 +28,20 @@ export const BasicTemplate: React.FC<BasicTemplateProps> = ({
         </div>
         <p className="repo-description">{repoDescription}</p>
         <div className="repo-stats">
-          {showStars && (
-            <div className="stat-item">
-              <span className="stat-label">Stars:</span>
-              <span className="stat-value">{repoStars}</span>
-            </div>
-          )}
-          {showForks && (
-            <div className="stat-item">
-              <span className="stat-label">Forks:</span>
-              <span className="stat-value">{repoForks}</span>
-            </div>
-          )}
+          <div className="stats-group">
+            {showStars && (
+              <div className="stat-item">
+                <span className="stat-label">Stars:</span>
+                <span className="stat-value">{repoStars}</span>
+              </div>
+            )}
+            {showForks && (
+              <div className="stat-item">
+                <span className="stat-label">Forks:</span>
+                <span className="stat-value">{repoForks}</span>
+              </div>
+            )}
+          </div>
           <div className="stat-item languages">
             <span className="stat-label">Languages:</span>
             <div className="language-tags">
