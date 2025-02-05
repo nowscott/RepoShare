@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Typography, Button } from 'antd';
 import { StepBackwardFilled, StepForwardFilled, ShareAltOutlined } from '@ant-design/icons';
-import Input from '../Input';
+import RepoInput from '../Input';
 import { downloadPreviewImage } from '../../utils/download';
 
 const { Header: AntHeader } = Layout;
@@ -34,11 +34,11 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
         borderBottom: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>        
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: '0 0 200px', justifyContent: 'flex-start' }}>        
         <Button
           type="default"
           icon={leftSiderCollapsed ? (
-            <StepForwardFilled style={{ color: '#fa8c16' }} />
+            <StepForwardFilled style={{ color: '#1C68DC' }} />
           ) : (
             <StepBackwardFilled style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />
           )}
@@ -75,42 +75,40 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
           </a>
         </Title>
       </div>
-      <div style={{ flex: '1 1 auto', display: 'flex', alignItems: 'center', position: 'relative' }}>
-        <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', width: '420px' }}>
-          <Input onSubmit={onSubmit} />
-        </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Button
-            type="default"
-            icon={<ShareAltOutlined style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />}
-            onClick={() => downloadPreviewImage()}
-            style={{
-              padding: 0,
-              width: '32px',
-              height: '32px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          />
-          <Button
-            type="default"
-            icon={rightSiderCollapsed ? (
-              <StepBackwardFilled style={{ color: '#fa8c16' }} />
-            ) : (
-              <StepForwardFilled style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />
-            )}
-            onClick={onRightSiderCollapse}
-            style={{
-              padding: 0,
-              width: '32px',
-              height: '32px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          />
-        </div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1 1 auto' }}>
+        <RepoInput onSubmit={onSubmit} />
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: '0 0 200px', justifyContent: 'flex-end' }}>
+        <Button
+          type="default"
+          icon={<ShareAltOutlined style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />}
+          onClick={() => downloadPreviewImage()}
+          style={{
+            padding: 0,
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        />
+        <Button
+          type="default"
+          icon={rightSiderCollapsed ? (
+            <StepBackwardFilled style={{ color: '#1C68DC' }} />
+          ) : (
+            <StepForwardFilled style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />
+          )}
+          onClick={onRightSiderCollapse}
+          style={{
+            padding: 0,
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        />
       </div>
     </AntHeader>
   );
