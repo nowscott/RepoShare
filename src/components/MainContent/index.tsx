@@ -49,7 +49,7 @@ const MainContent: React.FC<MainContentProps> = ({
         width={160}
         className="app-sider"
         theme={isDarkMode ? 'dark' : 'light'}
-        style={{ position: 'fixed', left: 0, height: '90vh', top: '64px', zIndex: 20 }}
+        style={{ position: 'fixed', left: 0, height: '90vh', top: '64px', zIndex: 20, borderRight: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}` }}
       >
         <Sidebar
           selectedTemplate={selectedTemplate}
@@ -65,7 +65,7 @@ const MainContent: React.FC<MainContentProps> = ({
         width={160}
         className="app-sider"
         theme={isDarkMode ? 'dark' : 'light'}
-        style={{ position: 'fixed', right: 0, height: '90vh', top: '64px', zIndex: 20 }}
+        style={{ position: 'fixed', right: 0, height: '90vh', top: '64px', zIndex: 20, borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}` }}
       >
         <PreviewControl
           controls={controls}
