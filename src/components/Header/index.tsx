@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Typography } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { StepBackwardFilled, StepForwardFilled } from '@ant-design/icons';
 import Input from '../Input';
 
 const { Header: AntHeader } = Layout;
@@ -35,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         {leftSiderCollapsed ? (
-          <MenuUnfoldOutlined
+          <StepForwardFilled
             style={{
               fontSize: '18px',
               color: isDarkMode ? '#ffffff' : '#000000',
@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
             onClick={onLeftSiderCollapse}
           />
         ) : (
-          <MenuFoldOutlined
+          <StepBackwardFilled
             style={{
               fontSize: '18px',
               color: isDarkMode ? '#ffffff' : '#000000',
@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
       <div style={{ marginLeft: 'auto', flex: '0 1 420px', display: 'flex', alignItems: 'center', gap: '16px' }}>
         <Input onSubmit={onSubmit} />
         {rightSiderCollapsed ? (
-          <MenuUnfoldOutlined
+          <StepBackwardFilled
             style={{
               fontSize: '18px',
               color: isDarkMode ? '#ffffff' : '#000000',
@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
             onClick={onRightSiderCollapse}
           />
         ) : (
-          <MenuFoldOutlined
+          <StepForwardFilled
             style={{
               fontSize: '18px',
               color: isDarkMode ? '#ffffff' : '#000000',
