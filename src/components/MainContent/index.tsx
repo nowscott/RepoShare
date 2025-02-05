@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout } from 'antd';
 import Sidebar from '../Sidebar';
 import Preview from '../Preview';
+import PreviewControl from '../PreviewControl';
 
 const { Content, Sider } = Layout;
 
@@ -27,10 +28,25 @@ const MainContent: React.FC<MainContentProps> = ({
   isDarkMode,
   repoData
 }) => {
+  const [controls, setControls] = useState({
+    showForks: true,
+    showStars: true,
+    showHomepage: true,
+    showAuthorAvatar: true,
+    showAuthorName: true,
+  });
+
+  const handleControlChange = (key: string, value: boolean) => {
+    setControls(prev => ({
+      ...prev,
+      [key]: value
+    }));
+  };
+
   return (
     <Layout hasSider>
       <Sider
-        width={200}
+        width={160}
         className="app-sider"
         theme={isDarkMode ? 'dark' : 'light'}
       >
@@ -39,11 +55,21 @@ const MainContent: React.FC<MainContentProps> = ({
           onTemplateSelect={onTemplateSelect}
         />
       </Sider>
-      <Content className="app-content" style={{ padding: '24px', minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Content className="app-content" style={{ padding: '24px', minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: isDarkMode ? '#141414' : '#fff', borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`, borderRight: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}` }}>
         <div style={{ width: '750px', minWidth: '750px', flex: '0 0 750px' }}>
-          <Preview selectedTemplate={selectedTemplate} {...repoData} />
+          <Preview selectedTemplate={selectedTemplate} {...repoData} {...controls} />
         </div>
       </Content>
+      <Sider
+        width={160}
+        className="app-sider"
+        theme={isDarkMode ? 'dark' : 'light'}
+      >
+        <PreviewControl
+          controls={controls}
+          onControlChange={handleControlChange}
+        />
+      </Sider>
     </Layout>
   );
 };

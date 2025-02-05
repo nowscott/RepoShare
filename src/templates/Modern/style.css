@@ -30,13 +30,11 @@
   margin-bottom: 24px;
 }
 
-.modern-template .modern-template .repo-name {
+.modern-template .repo-name {
   font-size: 2.5rem;
-  color: #2d3748;
   margin: 0;
-  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #2d3748;
+  font-weight: bold;
 }
 
 .modern-template .repo-link {
