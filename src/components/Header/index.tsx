@@ -9,9 +9,13 @@ const { Title } = Typography;
 interface HeaderProps {
   isDarkMode: boolean;
   onSubmit: (repoUrl: string) => void;
+  leftSiderCollapsed: boolean;
+  rightSiderCollapsed: boolean;
+  onLeftSiderCollapse: () => void;
+  onRightSiderCollapse: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit }) => {
+const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse }) => {
   return (
     <AntHeader
       className="app-header"
@@ -30,13 +34,25 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit }) => {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <MenuUnfoldOutlined
-          style={{
-            fontSize: '18px',
-            color: isDarkMode ? '#ffffff' : '#000000',
-            cursor: 'pointer'
-          }}
-        />
+        {leftSiderCollapsed ? (
+          <MenuUnfoldOutlined
+            style={{
+              fontSize: '18px',
+              color: isDarkMode ? '#ffffff' : '#000000',
+              cursor: 'pointer'
+            }}
+            onClick={onLeftSiderCollapse}
+          />
+        ) : (
+          <MenuFoldOutlined
+            style={{
+              fontSize: '18px',
+              color: isDarkMode ? '#ffffff' : '#000000',
+              cursor: 'pointer'
+            }}
+            onClick={onLeftSiderCollapse}
+          />
+        )}
         <Title
           level={4}
           style={{
@@ -51,13 +67,25 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit }) => {
       </div>
       <div style={{ marginLeft: 'auto', flex: '0 1 420px', display: 'flex', alignItems: 'center', gap: '16px' }}>
         <Input onSubmit={onSubmit} />
-        <MenuFoldOutlined
-          style={{
-            fontSize: '18px',
-            color: isDarkMode ? '#ffffff' : '#000000',
-            cursor: 'pointer'
-          }}
-        />
+        {rightSiderCollapsed ? (
+          <MenuUnfoldOutlined
+            style={{
+              fontSize: '18px',
+              color: isDarkMode ? '#ffffff' : '#000000',
+              cursor: 'pointer'
+            }}
+            onClick={onRightSiderCollapse}
+          />
+        ) : (
+          <MenuFoldOutlined
+            style={{
+              fontSize: '18px',
+              color: isDarkMode ? '#ffffff' : '#000000',
+              cursor: 'pointer'
+            }}
+            onClick={onRightSiderCollapse}
+          />
+        )}
       </div>
     </AntHeader>
   );
