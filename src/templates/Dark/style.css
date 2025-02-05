@@ -1,5 +1,3 @@
-@import url('https://chinese-fonts-cdn.deno.dev/packages/mzxst/dist/MZPXorig/result.css');
-
 .dark-template {
   width: 100%;
   height: 100%;
@@ -10,7 +8,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'MuzaiPixel', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  font-family:'MuzaiPixel';
+  font-weight:'400'
 }
 
 .dark-template .content {

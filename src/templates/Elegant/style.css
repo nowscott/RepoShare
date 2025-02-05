@@ -1,5 +1,3 @@
-@import url('https://chinese-fonts-cdn.deno.dev/packages/jhlst/dist/京華老宋体v1_007/result.css');
-
 .elegant-template {
   width: 100%;
   height: 100%;
@@ -9,7 +7,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: '京華老宋体v1_007', serif;
+  font-family:'KingHwa_OldSong';
+  font-weight:'400'
 }
 
 .elegant-template .content-container {

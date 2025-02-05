@@ -1,5 +1,3 @@
-@import url('https://chinese-fonts-cdn.deno.dev/packages/hwmct/dist/汇文明朝体/result.css');
-
 .basic-template {
   background: linear-gradient(135deg, #003153 0%, #f5f7fa 100%);
   width: 100%;
@@ -9,6 +7,7 @@
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  font-family: '汇文明朝体', serif;
 }
 
 .basic-template .content-wrapper {
@@ -21,7 +20,6 @@
   gap: 20px;
   box-sizing: border-box;
   box-shadow: 0 10px 30px rgba(0, 49, 83, 0.15);
-  font-family: '汇文明朝体', serif;
 }
 
 .basic-template .author-info {
@@ -105,7 +103,7 @@
 }
 
 .basic-template .language-tag {
-  background-color: #a42423;
+  background-color: #f49958;
   color: #2c3e50;
   padding: 4px 10px;
   border-radius: 12px;
