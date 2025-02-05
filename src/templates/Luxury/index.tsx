@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.css';
-
 import { LuxuryTemplateProps } from '../../types/templates';
 
 export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({

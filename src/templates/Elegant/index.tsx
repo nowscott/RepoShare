@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.css';
-
 import { ElegantTemplateProps } from '../../types/templates';
 
 export const ElegantTemplate: React.FC<ElegantTemplateProps> = ({

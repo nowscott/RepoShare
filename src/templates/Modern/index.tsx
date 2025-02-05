@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.css';
-
 import { ModernTemplateProps } from '../../types/templates';
 
 export const ModernTemplate: React.FC<ModernTemplateProps> = ({

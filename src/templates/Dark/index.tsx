@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.css';
-
 import { DarkTemplateProps } from '../../types/templates';
 
 export const DarkTemplate: React.FC<DarkTemplateProps> = ({
@@ -20,6 +19,7 @@ export const DarkTemplate: React.FC<DarkTemplateProps> = ({
 }) => {
   return (
     <div className="dark-template">
+
       <div className="content">
         <h1 className="repo-name">{repoName}</h1>
         <p className="repo-description">{repoDescription}</p>
