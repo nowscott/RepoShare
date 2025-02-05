@@ -49,14 +49,15 @@ const MainContent: React.FC<MainContentProps> = ({
         width={160}
         className="app-sider"
         theme={isDarkMode ? 'dark' : 'light'}
+        style={{ position: 'fixed', left: 0, height: '90vh', top: '64px', zIndex: 20 }}
       >
         <Sidebar
           selectedTemplate={selectedTemplate}
           onTemplateSelect={onTemplateSelect}
         />
       </Sider>
-      <Content className="app-content" style={{ padding: '24px', minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: isDarkMode ? '#141414' : '#fff', borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`, borderRight: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}` }}>
-        <div style={{ width: '750px', minWidth: '750px', flex: '0 0 750px' }}>
+      <Content className="app-content" style={{ padding: '24px', minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: isDarkMode ? '#141414' : '#fff', borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`, borderRight: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`,  overflow: 'auto' }}>
+        <div style={{ width: '750px', flex: 'none' }}>
           <Preview selectedTemplate={selectedTemplate} {...repoData} {...controls} />
         </div>
       </Content>
@@ -64,6 +65,7 @@ const MainContent: React.FC<MainContentProps> = ({
         width={160}
         className="app-sider"
         theme={isDarkMode ? 'dark' : 'light'}
+        style={{ position: 'fixed', right: 0, height: '90vh', top: '64px', zIndex: 20 }}
       >
         <PreviewControl
           controls={controls}
