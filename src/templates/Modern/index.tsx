@@ -1,19 +1,7 @@
 import React from 'react';
 import './style.css';
 
-interface ModernTemplateProps {
-  repoName?: string;
-  repoDescription?: string;
-  repoStars?: number;
-  repoForks?: number;
-  repoLanguages?: string[];
-  authorName?: string;
-  homepage?: string;
-  showStars?: boolean;
-  showForks?: boolean;
-  showHomepage?: boolean;
-  showAuthorName?: boolean;
-}
+import { ModernTemplateProps } from '../../types/templates';
 
 export const ModernTemplate: React.FC<ModernTemplateProps> = ({
   repoName = 'Repository Name',

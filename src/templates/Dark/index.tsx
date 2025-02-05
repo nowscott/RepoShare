@@ -1,21 +1,7 @@
 import React from 'react';
 import './style.css';
 
-interface DarkTemplateProps {
-  repoName?: string;
-  repoDescription?: string;
-  repoStars?: number;
-  repoForks?: number;
-  repoLanguages?: string[];
-  authorName?: string;
-  authorAvatar?: string;
-  homepage?: string;
-  showStars?: boolean;
-  showForks?: boolean;
-  showHomepage?: boolean;
-  showAuthorAvatar?: boolean;
-  showAuthorName?: boolean;
-}
+import { DarkTemplateProps } from '../../types/templates';
 
 export const DarkTemplate: React.FC<DarkTemplateProps> = ({
   repoName = 'Repository Name',

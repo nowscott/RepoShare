@@ -1,21 +1,7 @@
 import React from 'react';
 import './style.css';
 
-interface CardTemplateProps {
-  repoName?: string;
-  repoDescription?: string;
-  repoStars?: number;
-  repoForks?: number;
-  repoLanguages?: string[];
-  authorName?: string;
-  authorAvatar?: string;
-  homepage?: string;
-  showStars?: boolean;
-  showForks?: boolean;
-  showHomepage?: boolean;
-  showAuthorAvatar?: boolean;
-  showAuthorName?: boolean;
-}
+import { CardTemplateProps } from '../../types/templates';
 
 export const CardTemplate: React.FC<CardTemplateProps> = ({
   repoName = 'Repository Name',

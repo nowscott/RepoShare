@@ -1,19 +1,7 @@
 import React from 'react';
 import './style.css';
 
-interface ElegantTemplateProps {
-  repoName?: string;
-  repoDescription?: string;
-  repoStars?: number;
-  repoForks?: number;
-  repoLanguages?: string[];
-  authorName?: string;
-  homepage?: string;
-  showStars?: boolean;
-  showForks?: boolean;
-  showHomepage?: boolean;
-  showAuthorName?: boolean;
-}
+import { ElegantTemplateProps } from '../../types/templates';
 
 export const ElegantTemplate: React.FC<ElegantTemplateProps> = ({
   repoName = 'Repository Name',

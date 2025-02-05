@@ -4,6 +4,7 @@ import DarkTemplate from '../../templates/Dark';
 import CardTemplate from '../../templates/Card';
 import ModernTemplate from '../../templates/Modern';
 import ElegantTemplate from '../../templates/Elegant';
+import LuxuryTemplate from '../../templates/Luxury';
 
 interface PreviewProps {
   selectedTemplate: string;
@@ -30,7 +31,8 @@ const Preview: React.FC<PreviewProps> = (props) => {
     dark: DarkTemplate,
     card: CardTemplate,
     modern: ModernTemplate,
-    elegant: ElegantTemplate
+    elegant: ElegantTemplate,
+    luxury: LuxuryTemplate
   };
 
   const SelectedTemplate = templates[selectedTemplate as keyof typeof templates];
