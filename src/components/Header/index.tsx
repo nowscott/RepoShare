@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Typography } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import Input from '../Input';
 
 const { Header: AntHeader } = Layout;
@@ -28,19 +29,35 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit }) => {
         borderBottom: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`
       }}
     >
-      <Title
-        level={4}
-        style={{
-          margin: 0,
-          color: isDarkMode ? '#ffffff' : '#000000',
-          fontSize: '18px',
-          lineHeight: '64px'
-        }}
-      >
-        RepoShare
-      </Title>
-      <div style={{ marginLeft: 'auto', flex: '0 1 420px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <MenuUnfoldOutlined
+          style={{
+            fontSize: '18px',
+            color: isDarkMode ? '#ffffff' : '#000000',
+            cursor: 'pointer'
+          }}
+        />
+        <Title
+          level={4}
+          style={{
+            margin: 0,
+            color: isDarkMode ? '#ffffff' : '#000000',
+            fontSize: '18px',
+            lineHeight: '64px'
+          }}
+        >
+          RepoShare
+        </Title>
+      </div>
+      <div style={{ marginLeft: 'auto', flex: '0 1 420px', display: 'flex', alignItems: 'center', gap: '16px' }}>
         <Input onSubmit={onSubmit} />
+        <MenuFoldOutlined
+          style={{
+            fontSize: '18px',
+            color: isDarkMode ? '#ffffff' : '#000000',
+            cursor: 'pointer'
+          }}
+        />
       </div>
     </AntHeader>
   );
