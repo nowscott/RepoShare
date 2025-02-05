@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Typography, Button } from 'antd';
-import { StepBackwardFilled, StepForwardFilled, DownloadOutlined } from '@ant-design/icons';
+import { StepBackwardFilled, StepForwardFilled, ShareAltOutlined } from '@ant-design/icons';
 import Input from '../Input';
 import { downloadPreviewImage } from '../../utils/download';
 
@@ -82,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '16px' }}>
           <Button
             type="default"
-            icon={<DownloadOutlined style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />}
+            icon={<ShareAltOutlined style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />}
             onClick={() => downloadPreviewImage()}
             style={{
               padding: 0,
