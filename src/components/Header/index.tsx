@@ -62,7 +62,18 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
             lineHeight: '64px'
           }}
         >
-          RepoShare
+          <a
+            href="https://github.com/nowscott/RepoShare"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'inherit',
+              textDecoration: 'none',
+              transition: 'opacity 0.2s',
+            }}
+          >
+            RepoShare
+          </a>
         </Title>
       </div>
       <div style={{ marginLeft: 'auto', flex: '0 1 420px', display: 'flex', alignItems: 'center', gap: '16px' }}>
