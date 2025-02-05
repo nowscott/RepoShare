@@ -10,6 +10,8 @@ interface MainContentProps {
   selectedTemplate: string;
   onTemplateSelect: (templateId: string) => void;
   isDarkMode: boolean;
+  leftSiderCollapsed?: boolean;
+  rightSiderCollapsed?: boolean;
   repoData: {
     repoName: string;
     repoDescription: string;
@@ -26,6 +28,8 @@ const MainContent: React.FC<MainContentProps> = ({
   selectedTemplate,
   onTemplateSelect,
   isDarkMode,
+  leftSiderCollapsed = false,
+  rightSiderCollapsed = false,
   repoData
 }) => {
   const [controls, setControls] = useState({
@@ -49,7 +53,9 @@ const MainContent: React.FC<MainContentProps> = ({
         width={160}
         className="app-sider"
         theme={isDarkMode ? 'dark' : 'light'}
-        style={{ position: 'fixed', left: 0, height: '90vh', top: '64px', zIndex: 20 }}
+        collapsed={leftSiderCollapsed}
+        collapsedWidth={0}
+        style={{ position: 'fixed', left: 0, height: '90vh', top: '64px', zIndex: 20, borderRight: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`, overflow: 'hidden' }}
       >
         <Sidebar
           selectedTemplate={selectedTemplate}
@@ -65,7 +71,9 @@ const MainContent: React.FC<MainContentProps> = ({
         width={160}
         className="app-sider"
         theme={isDarkMode ? 'dark' : 'light'}
-        style={{ position: 'fixed', right: 0, height: '90vh', top: '64px', zIndex: 20 }}
+        collapsed={rightSiderCollapsed}
+        collapsedWidth={0}
+        style={{ position: 'fixed', right: 0, height: '90vh', top: '64px', zIndex: 20, borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}` }}
       >
         <PreviewControl
           controls={controls}
