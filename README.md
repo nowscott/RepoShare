@@ -79,26 +79,7 @@ RepoShare 选择了 React 18.x 作为核心前端框架，充分利用其强大�
 在图片处理方面，我们综合运用了 HTML Canvas 和 dom-to-image 技术。HTML Canvas 提供了高性能的绘图能力，支持实时渲染复杂的图形效果。而 dom-to-image 则让我们能够将 DOM 节点无缝转换为多种格式的图片，确保生成的分享图片保持高质量的视觉效果。这两项技术的结合，为实现高质量的图片生成功能提供了强大支持。
 
 ## 🤝 贡献指南
-
-我们欢迎任何形式的贡献，包括但不限于：
-
-- 提交问题和建议
-- 新增模板设计
-- 改进现有功能
-- 修复 bug
-- 优化性能
-- 完善文档
-
-### 贡献步骤
-
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交改动 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 提交 Pull Request
-
 ### 模板开发指南
-
 #### 模板结构
 
 每个模板都需要包含以下文件：
@@ -109,40 +90,67 @@ src/templates/YourTemplate/
 └── style.css    # 模板的样式文件
 ```
 
+#### 模板配置
+
+所有模板的配置信息都集中在 `src/config/templates.tsx` 文件中管理。每个模板需要在此文件中添加相应的配置信息，包括：
+
+```typescript
+interface TemplateConfig {
+  id: string;        // 模板的唯一标识
+  name: string;      // 模板的显示名称
+  icon: ReactNode;   // 模板的图标组件
+  description: string; // 模板的描述信息
+  component: React.ComponentType<any>; // 模板的组件
+}
+```
+
+示例配置：
+
+```typescript
+{
+  id: 'modern',
+  name: '现代模板',
+  icon: <AppstoreOutlined />,
+  description: '现代简约风格，清晰展示项目信息',
+  component: ModernTemplate
+}
+```
+
+#### 模板属性
+
+每个模板组件都会接收以下属性：
+
+```typescript
+interface TemplateProps {
+  repoName: string;          // 仓库名称
+  repoDescription: string;   // 仓库描述
+  repoStars: number;         // Star 数量
+  repoForks: number;         // Fork 数量
+  repoLanguages: string[];   // 仓库使用的编程语言
+  authorName?: string;       // 作者名称
+  authorAvatar?: string;     // 作者头像
+  homepage?: string;         // 主页链接
+  showStars?: boolean;       // 是否显示 Star 数
+  showForks?: boolean;       // 是否显示 Fork 数
+  showHomepage?: boolean;    // 是否显示主页链接
+  showAuthorName?: boolean;  // 是否显示作者名称
+  showAuthorAvatar?: boolean; // 是否显示作者头像
+}
+```
+
 #### 开发步骤
 
 1. **创建模板目录**
    - 在 `src/templates` 目录下创建新的模板文件夹
    - 文件夹名称应使用 PascalCase 命名规范（如 `Modern`, `Elegant`）
 
-2. **实现模板接口**
-   - 在 `src/types/templates.ts` 中定义模板的 Props 接口
-   - 继承基础的模板属性：
-     ```typescript
-     interface YourTemplateProps {
-       repoName: string;
-       repoDescription: string;
-       repoStars: number;
-       repoForks: number;
-       repoLanguages: string[];
-       authorName?: string;
-       authorAvatar?: string;
-       homepage?: string;
-       showStars: boolean;
-       showForks: boolean;
-       showHomepage: boolean;
-       showAuthorAvatar: boolean;
-       showAuthorName: boolean;
-     }
-     ```
-
-3. **开发模板组件**
+2. **实现模板组件**
    ```typescript
    import React from 'react';
    import './style.css';
-   import { YourTemplateProps } from '../../types/templates';
+   import { TemplateProps } from '../../types/templates';
 
-   export const YourTemplate: React.FC<YourTemplateProps> = ({
+   export const YourTemplate: React.FC<TemplateProps> = ({
      repoName = 'Repository Name',
      repoDescription = 'Repository Description',
      repoStars = 0,
@@ -167,42 +175,11 @@ src/templates/YourTemplate/
    export default YourTemplate;
    ```
 
-4. **注册模板**
-   - 在 `src/components/Preview/index.tsx` 中导入并注册新模板：
-   ```typescript
-   import YourTemplate from '../../templates/YourTemplate';
+3. **添加配置信息**
+   - 在 `src/config/templates.tsx` 中添加新模板的配置
+   - 确保配置信息完整，包括 id、name、icon、description 和 component
 
-   const templates = {
-     // ... 其他模板
-     yourTemplate: YourTemplate
-   };
-   ```
-
-5. **侧边栏配置**
-   - 在 `src/components/Sidebar/index.tsx` 中添加模板配置：
-   ```typescript
-   import { YourTemplateIcon } from '../../assets/icons';
-
-   const templateConfigs = [
-     // ... 其他模板配置
-     {
-       key: 'yourTemplate',
-       name: '你的模板',
-       icon: <YourTemplateIcon />,
-       description: '模板描述文本',
-       previewImage: '/path/to/preview-image.png'
-     }
-   ];
-   ```
-
-   配置项说明：
-   - `key`: 模板的唯一标识符，需要与 Preview 组件中注册的键名保持一致
-   - `name`: 显示在侧边栏的模板名称
-   - `icon`: 模板的图标组件
-   - `description`: 模板的简短描述
-   - `previewImage`: 模板预览图的路径
-
-6. **添加预览图**
+4. **添加预览图**
    - 在 `public/previews/` 目录下添加模板预览图
    - 建议图片尺寸保持一致（推荐 750x400px）
    - 使用 PNG 格式以保证最佳显示效果
@@ -238,6 +215,15 @@ src/templates/YourTemplate/
    - 完成完整的本地测试
    - 更新模板展示文档
    - 提供使用示例和效果预览
+
+7. **添加配置信息**
+   - 在 `src/config/templates.tsx` 中添加新模板的配置
+   - 确保配置信息完整，包括 id、name、icon、description 和 component
+
+8. **添加预览图**
+   - 在 `public/previews/` 目录下添加模板预览图
+   - 建议图片尺寸保持一致（推荐 750x400px）
+   - 使用 PNG 格式以保证最佳显示效果
 
 ## 📄 开源协议
 

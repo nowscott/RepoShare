@@ -1,47 +1,22 @@
 import React from 'react';
-import BasicTemplate from '../../templates/Basic';
-import DarkTemplate from '../../templates/Dark';
-import CardTemplate from '../../templates/Card';
-import ModernTemplate from '../../templates/Modern';
-import ElegantTemplate from '../../templates/Elegant';
-import LuxuryTemplate from '../../templates/Luxury';
+import templates from '../../config/templates';
 
 interface PreviewProps {
   selectedTemplate: string;
-  repoName: string;
-  repoDescription: string;
-  repoStars: number;
-  repoForks: number;
-  repoLanguages: string[];
-  authorName?: string;
-  authorAvatar?: string;
-  homepage?: string;
-  showStars: boolean;
-  showForks: boolean;
-  showHomepage: boolean;
-  showAuthorAvatar: boolean;
-  showAuthorName: boolean;
+  [key: string]: any;
 }
 
 const Preview: React.FC<PreviewProps> = (props) => {
   const { selectedTemplate, ...commonProps } = props;
   
-  const templates = {
-    basic: BasicTemplate,
-    dark: DarkTemplate,
-    card: CardTemplate,
-    modern: ModernTemplate,
-    elegant: ElegantTemplate,
-    luxury: LuxuryTemplate
-  };
-
-  const SelectedTemplate = templates[selectedTemplate as keyof typeof templates];
-
-  if (!SelectedTemplate) {
+  const selectedTemplateConfig = templates.find(template => template.id === selectedTemplate);
+  
+  if (!selectedTemplateConfig) {
     return <div>未找到对应的模板: {selectedTemplate}</div>;
   }
 
-  return <SelectedTemplate {...commonProps} />;
+  const TemplateComponent = selectedTemplateConfig.component;
+  return <TemplateComponent {...commonProps} />;
 };
 
 export default Preview;
