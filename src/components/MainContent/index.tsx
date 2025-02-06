@@ -12,6 +12,9 @@ interface MainContentProps {
   isDarkMode: boolean;
   leftSiderCollapsed?: boolean;
   rightSiderCollapsed?: boolean;
+  onLeftSiderCollapse: () => void;
+  onRightSiderCollapse: () => void;
+  onResolutionChange?: (resolution: 'x8' | 'x4' | 'x2') => void;
   repoData: {
     repoName: string;
     repoDescription: string;
@@ -30,6 +33,7 @@ const MainContent: React.FC<MainContentProps> = ({
   isDarkMode,
   leftSiderCollapsed = false,
   rightSiderCollapsed = false,
+  onResolutionChange,
   repoData
 }) => {
   const [controlSettings, setControlSettings] = useState({
@@ -42,6 +46,10 @@ const MainContent: React.FC<MainContentProps> = ({
 
   const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
 
+  React.useEffect(() => {
+    onResolutionChange?.('x4');
+  }, []);
+
   const handleControlChange = (key: string, value: boolean) => {
     setControlSettings(prev => ({
       ...prev,
@@ -51,6 +59,7 @@ const MainContent: React.FC<MainContentProps> = ({
 
   const handleResolutionChange = (resolution: 'x8' | 'x4' | 'x2') => {
     setSelectedResolution(resolution);
+    onResolutionChange?.(resolution);
   };
 
   return (

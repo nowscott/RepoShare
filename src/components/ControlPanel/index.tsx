@@ -27,9 +27,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
   ];
 
   const resolutionItems = [
-    { key: 'x8', label: '8倍尺寸' },
-    { key: 'x4', label: '4倍尺寸' },
-    { key: 'x2', label: '2倍尺寸' },
+    { key: 'x8', label: '超高清' },
+    { key: 'x4', label: '高清' },
+    { key: 'x2', label: '标清' },
   ];
 
   const items = [
@@ -42,7 +42,6 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
           key: 'resolution',
           label: '分辨率',
           icon: <ExpandOutlined />,
-          style: { borderTop: '1px solid rgba(0, 0, 0, 0.06)' },
           children: resolutionItems.map((item) => ({
             key: item.key,
             label: item.label,
