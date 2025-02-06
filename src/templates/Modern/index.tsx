@@ -17,6 +17,7 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({
 }) => {
   return (
     <div className="modern-template">
+      <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content-wrapper">
         <div className="header">
           <h1 className="repo-name">{repoName}</h1>

@@ -17,6 +17,7 @@ export const BasicTemplate: React.FC<BasicTemplateProps> = ({
 }) => {
   return (
     <div className="basic-template">
+      <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content-wrapper">
         <div className="header">
           <h1 className="repo-name">{repoName}</h1>

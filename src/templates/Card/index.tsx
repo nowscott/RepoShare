@@ -19,6 +19,7 @@ export const CardTemplate: React.FC<CardTemplateProps> = ({
 }) => {
   return (
     <div className="card-template">
+      <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="card">
         <div className="card-header">
           <div className="header-content">
