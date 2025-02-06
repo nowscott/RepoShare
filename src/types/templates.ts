@@ -11,6 +11,7 @@ export interface BaseTemplateProps {
   showForks?: boolean;
   showHomepage?: boolean;
   showAuthorName?: boolean;
+  layout?: 'default' | 'portrait';
 }
 
 // 带有作者头像的模板属性接口

@@ -3,6 +3,7 @@ import templates from '../../config/templates';
 
 interface PreviewProps {
   selectedTemplate: string;
+  layout?: 'default' | 'portrait';
   [key: string]: any;
 }
 

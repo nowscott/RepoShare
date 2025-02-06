@@ -109,7 +109,7 @@
   flex: 1;
   min-width: 200px;
   color: #58a6ff;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   text-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
 }
 
@@ -130,7 +130,7 @@
   line-height: 1.6;
   margin: 0;
   letter-spacing: 0.01em;
-  max-width: 70%;
+  max-width: 80%;
 }
 
 .card-template .language-tag {

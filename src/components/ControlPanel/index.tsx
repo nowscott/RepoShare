@@ -1,11 +1,12 @@
 import React from 'react';
 import { Menu, Checkbox } from 'antd';
-import { StarOutlined, ForkOutlined, HomeOutlined, UserOutlined, IdcardOutlined, ExpandOutlined, FileImageOutlined } from '@ant-design/icons';
+import { StarOutlined, ForkOutlined, HomeOutlined, UserOutlined, IdcardOutlined, ExpandOutlined, FileImageOutlined, ColumnHeightOutlined } from '@ant-design/icons';
 
 interface ControlPanelProps {
   onControlChange: (key: string, value: boolean) => void;
   onResolutionChange: (resolution: Resolution) => void;
   onFormatChange?: (format: Format) => void;
+  onLayoutChange?: (layout: Layout) => void;
   controlSettings: {
     showForks: boolean;
     showStars: boolean;
@@ -15,12 +16,14 @@ interface ControlPanelProps {
   };
   selectedResolution: Resolution;
   selectedFormat?: Format;
+  selectedLayout?: Layout;
 }
 
 type Resolution = 'x8' | 'x4' | 'x2';
 type Format = 'png' | 'jpeg';
+type Layout = 'default' | 'portrait';
 
-const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResolutionChange, onFormatChange, controlSettings, selectedResolution, selectedFormat = 'png' }) => {
+const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResolutionChange, onFormatChange, onLayoutChange, controlSettings, selectedResolution, selectedFormat = 'png', selectedLayout = 'default' }) => {
   const controlItems = [
     { key: 'showStars', label: 'Star 数', icon: <StarOutlined /> },
     { key: 'showForks', label: 'Fork 数', icon: <ForkOutlined /> },
@@ -40,6 +43,11 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
     { key: 'jpeg', label: 'JPEG' },
   ];
 
+  const layoutItems = [
+    { key: 'default', label: '默认' },
+    { key: 'portrait', label: '竖屏' },
+  ];
+
   const items = [
     {
       key: 'controls',
@@ -54,6 +62,16 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
             key: item.key,
             label: item.label,
             onClick: () => onResolutionChange(item.key as Resolution)
+          }))
+        },
+        {
+          key: 'layout',
+          label: '布局方向',
+          icon: <ColumnHeightOutlined />,
+          children: layoutItems.map((item) => ({
+            key: item.key,
+            label: item.label,
+            onClick: () => onLayoutChange?.(item.key as Layout)
           }))
         },
         {
@@ -100,13 +118,15 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
     selectedKeys.push(selectedFormat);
   }
 
+  if (selectedLayout) {
+    selectedKeys.push(selectedLayout);
+  }
+
   return (
     <Menu
       mode="inline"
       selectedKeys={selectedKeys}
-      style={{ height: '100%', borderRight: 0 }}
       items={items}
-      multiple
     />
   );
 };
