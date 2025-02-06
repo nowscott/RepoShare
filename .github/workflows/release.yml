@@ -74,9 +74,8 @@ jobs:
 
       - name: Create Release
         if: steps.compare_versions.outputs.release == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.read_package_version.outputs.version }}
-          release_name: v${{ steps.read_package_version.outputs.version }}
+          name: v${{ steps.read_package_version.outputs.version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
