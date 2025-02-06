@@ -12,6 +12,7 @@
 
 .basic-template .content-wrapper {
   backdrop-filter: blur(10px);
+  width: 96%;
   padding: 32px;
   background: linear-gradient(135deg, #f5f7fa 0%, #003153 100%);
   border-radius: 20px;
