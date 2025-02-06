@@ -51,7 +51,7 @@
 .luxury-template .repo-name {
   font-size: 3rem;
   color: #ce9b57;
-  margin: 0;
+  margin: 20px 0;
   text-shadow: 0 0 20px rgba(206, 155, 87, 0.2);
   letter-spacing: -0.02em;
 }
