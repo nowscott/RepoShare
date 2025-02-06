@@ -3,12 +3,12 @@
   height: 100%;
   min-height: 420px;
   padding: 40px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+  background: linear-gradient(135deg, #00264d 0%, #001529 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family:'快看世界体';
-  font-weight:'400';
+  font-family: '快看世界体';
+  font-weight: 400;
   position: relative;
 }
 
@@ -27,48 +27,44 @@
 .luxury-template .content-wrapper {
   width: 100%;
   max-width: 800px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(11, 10, 9, 0.95);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(206, 155, 87, 0.1);
   border-radius: 16px;
-  padding: 48px;
+  padding: 36px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-              inset 0 0 60px rgba(255, 215, 0, 0.05);
+              inset 0 0 60px rgba(206, 155, 87, 0.05);
   position: relative;
   overflow: hidden;
-}
-
-.luxury-template .content-wrapper::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
 }
 
 .luxury-template .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .luxury-template .repo-name {
   font-size: 3rem;
-  color: #ffd700;
+  color: #ce9b57;
   margin: 0;
-  text-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+  text-shadow: 0 0 20px rgba(206, 155, 87, 0.2);
   letter-spacing: -0.02em;
 }
 
+.luxury-template .homepage-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .luxury-template .repo-homepage {
-  color: rgba(255, 215, 0, 0.8);
+  color: rgba(206, 155, 87, 0.8);
   text-decoration: none;
   font-size: 1.1rem;
   padding: 8px 20px;
-  border: 1px solid rgba(255, 215, 0, 0.3);
+  border: 1px solid rgba(206, 155, 87, 0.3);
   border-radius: 20px;
   transition: all 0.3s ease;
   pointer-events: none;
@@ -78,35 +74,31 @@
   color: #e0e0e0;
   font-size: 1.2rem;
   line-height: 1.6;
-  margin: 0 0 40px;
   letter-spacing: 0.02em;
 }
 
 .luxury-template .repo-stats {
   display: flex;
-  gap: 48px;
-  padding: 32px 0;
-  border-top: 1px solid rgba(255, 215, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
-  margin-bottom: 32px;
+  gap: 32px;
+  padding: 24px 0;
 }
 
 .luxury-template .stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .luxury-template .stat-value {
   font-size: 2.2rem;
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  color: #ce9b57;
+  text-shadow: 0 0 10px rgba(206, 155, 87, 0.2);
 }
 
 .luxury-template .stat-label {
   font-size: 0.9rem;
-  color: rgba(255, 215, 0, 0.6);
+  color: rgba(206, 155, 87, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -114,17 +106,17 @@
 .luxury-template .language-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 32px;
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
 .luxury-template .language-tag {
-  background: rgba(255, 215, 0, 0.1);
-  color: #ffd700;
+  background: rgba(206, 155, 87, 0.1);
+  color: #ce9b57;
   padding: 8px 20px;
   border-radius: 20px;
   font-size: 0.95rem;
-  border: 1px solid rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(206, 155, 87, 0.2);
   backdrop-filter: blur(5px);
   transition: all 0.3s ease;
 }
@@ -137,11 +129,12 @@
 }
 
 .luxury-template .author-prefix {
-  color: rgba(255, 215, 0, 0.6);
+  color: rgba(206, 155, 87, 0.6);
   font-size: 0.9rem;
 }
 
 .luxury-template .author-name {
-  color: #ffd700;
+  color: #ce9b57;
   font-size: 1rem;
+  font-weight: 500;
 }
