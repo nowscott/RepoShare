@@ -21,8 +21,9 @@ export interface AvatarTemplateProps extends BaseTemplateProps {
 
 // 导出具体模板的类型定义
 export type BasicTemplateProps = BaseTemplateProps;
+export type InkTemplateProps = BaseTemplateProps;
 export type ModernTemplateProps = BaseTemplateProps;
 export type ElegantTemplateProps = BaseTemplateProps;
 export type LuxuryTemplateProps = BaseTemplateProps;
-export type DarkTemplateProps = AvatarTemplateProps;
+export type PixelTemplateProps = AvatarTemplateProps;
 export type CardTemplateProps = AvatarTemplateProps;
