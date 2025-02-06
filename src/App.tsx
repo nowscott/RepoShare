@@ -16,8 +16,8 @@ function App() {
   const [repoData, setRepoData] = useState({
     repoName: 'RepoShare',
     repoDescription: '一个用于生成 GitHub 仓库预览图的工具，支持卡片、深色、现代等多种精美模板。可自定义显示仓库信息、作者信息、语言标签等元素，让你的仓库展示更加专业和吸引人。适用于 README 展示、社交分享、项目文档等多种场景。',
-    repoStars: 999,
-    repoForks: 66,
+    repoStars: Math.floor(Math.random() * 900 + 100),
+    repoForks: Math.floor(Math.random() * 90 + 10),
     repoLanguages: ['TypeScript','CSS','HTML'],
     authorName: 'NowScott',
     authorAvatar: "https://avatars.githubusercontent.com/u/86339284?v=4",
