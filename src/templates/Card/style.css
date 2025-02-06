@@ -13,7 +13,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'SmileySans-Oblique', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  font-family:'Smiley Sans Oblique';
+  font-weight:'400'
 }
 
 .card-template .card {
