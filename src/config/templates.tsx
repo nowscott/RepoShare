@@ -24,6 +24,13 @@ const templates: TemplateConfig[] = [
     component: CardTemplate
   },
   {
+    id: 'luxury',
+    name: '黑金模板',
+    icon: <GoldOutlined />,
+    description: '高端大气的黑金配色，彰显项目价值',
+    component: LuxuryTemplate
+  },
+  {
     id: 'dark',
     name: '深色模板',
     icon: <BgColorsOutlined />,
@@ -43,13 +50,6 @@ const templates: TemplateConfig[] = [
     icon: <CrownOutlined />,
     description: '优雅精致的设计，突出项目品质',
     component: ElegantTemplate
-  },
-  {
-    id: 'luxury',
-    name: '黑金模板',
-    icon: <GoldOutlined />,
-    description: '高端大气的黑金配色，彰显项目价值',
-    component: LuxuryTemplate
   },
   {
     id: 'basic',
