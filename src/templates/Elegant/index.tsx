@@ -17,6 +17,7 @@ export const ElegantTemplate: React.FC<ElegantTemplateProps> = ({
 }) => {
   return (
     <div className="elegant-template">
+      <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content-container">
         <div className="main-content">
           <h1 className="repo-name">{repoName}</h1>

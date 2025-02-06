@@ -17,6 +17,7 @@ export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
 }) => {
   return (
     <div className="luxury-template">
+      <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content-wrapper">
         <div className="header">
           <h1 className="repo-name">{repoName}</h1>

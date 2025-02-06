@@ -8,7 +8,20 @@
   justify-content: center;
   align-items: center;
   font-family:'快看世界体';
-  font-weight:'400'
+  font-weight:'400';
+  position: relative;
+}
+
+.luxury-template .watermark {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: none;
 }
 
 .luxury-template .content-wrapper {
