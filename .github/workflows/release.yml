@@ -54,8 +54,17 @@ jobs:
           git add package.json
           git commit -m "版本更新至 ${{ env.PACKAGE_VERSION }}" || echo "没有需要提交的更改"
 
+      - name: Delete existing tag if exists
+        if: steps.compare_versions.outputs.release == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NEW_VERSION=${{ steps.read_package_version.outputs.version }}
+          git tag -d v$NEW_VERSION 2>/dev/null || true
+          git push origin :refs/tags/v$NEW_VERSION 2>/dev/null || true
+
       - name: Create and push tag
-        if: env.RELEASE == 'true'
+        if: steps.compare_versions.outputs.release == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
