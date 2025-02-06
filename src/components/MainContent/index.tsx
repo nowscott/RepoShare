@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Layout } from 'antd';
 import Sidebar from '../Sidebar';
 import Preview from '../Preview';
-import PreviewControl from '../PreviewControl';
+import ControlPanel from '../ControlPanel';
 
 const { Content, Sider } = Layout;
 
@@ -12,6 +12,9 @@ interface MainContentProps {
   isDarkMode: boolean;
   leftSiderCollapsed?: boolean;
   rightSiderCollapsed?: boolean;
+  onLeftSiderCollapse: () => void;
+  onRightSiderCollapse: () => void;
+  onResolutionChange?: (resolution: 'x8' | 'x4' | 'x2') => void;
   repoData: {
     repoName: string;
     repoDescription: string;
@@ -30,9 +33,10 @@ const MainContent: React.FC<MainContentProps> = ({
   isDarkMode,
   leftSiderCollapsed = false,
   rightSiderCollapsed = false,
+  onResolutionChange,
   repoData
 }) => {
-  const [controls, setControls] = useState({
+  const [controlSettings, setControlSettings] = useState({
     showForks: true,
     showStars: true,
     showHomepage: true,
@@ -40,11 +44,22 @@ const MainContent: React.FC<MainContentProps> = ({
     showAuthorName: true,
   });
 
+  const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
+
+  React.useEffect(() => {
+    onResolutionChange?.('x4');
+  }, []);
+
   const handleControlChange = (key: string, value: boolean) => {
-    setControls(prev => ({
+    setControlSettings(prev => ({
       ...prev,
       [key]: value
     }));
+  };
+
+  const handleResolutionChange = (resolution: 'x8' | 'x4' | 'x2') => {
+    setSelectedResolution(resolution);
+    onResolutionChange?.(resolution);
   };
 
   return (
@@ -64,7 +79,7 @@ const MainContent: React.FC<MainContentProps> = ({
       </Sider>
       <Content className="app-content" style={{ padding: '24px', minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: isDarkMode ? '#141414' : '#fff', borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`, borderRight: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`,  overflow: 'auto' }}>
         <div style={{ width: '750px', flex: 'none' }}>
-          <Preview selectedTemplate={selectedTemplate} {...repoData} {...controls} />
+          <Preview selectedTemplate={selectedTemplate} {...repoData} {...controlSettings} />
         </div>
       </Content>
       <Sider
@@ -75,9 +90,11 @@ const MainContent: React.FC<MainContentProps> = ({
         collapsedWidth={0}
         style={{ position: 'fixed', right: 0, height: '90vh', top: '64px', zIndex: 20, borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}` }}
       >
-        <PreviewControl
-          controls={controls}
+        <ControlPanel
+          controlSettings={controlSettings}
           onControlChange={handleControlChange}
+          onResolutionChange={handleResolutionChange}
+          selectedResolution={selectedResolution}
         />
       </Sider>
     </Layout>

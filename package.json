@@ -1,7 +1,7 @@
 {
   "name": "reposhare",
   "private": true,
-  "version": "0.8.5",
+  "version": "0.8.6",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.6.0",
-    "@octokit/rest": "^21.1.0",
     "@types/axios": "^0.9.36",
     "antd": "^5.23.3",
     "axios": "^1.7.9",
+    "dayjs": "^1.11.13",
     "dom-to-image": "^2.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

@@ -14,19 +14,30 @@ interface HeaderProps {
   rightSiderCollapsed: boolean;
   onLeftSiderCollapse: () => void;
   onRightSiderCollapse: () => void;
+  selectedResolution: 'x8' | 'x4' | 'x2';
 }
 
-const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse }) => {
+const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse, selectedResolution }) => {
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async () => {
     setIsDownloading(true);
     message.loading('正在渲染图片...', 0);
     try {
-      await downloadPreviewImage();
+      const scaleMap = {
+        'x8': 8,
+        'x4': 4,
+        'x2': 2
+      };
+      const success = await downloadPreviewImage({ scale: scaleMap[selectedResolution] });
+      message.destroy();
+      if (success) {
+        message.success('图片已成功保存！', 1);
+      } else {
+        message.error('保存图片失败，请稍后重试', 1);
+      }
     } finally {
       setIsDownloading(false);
-      message.destroy();
     }
   };
   return (
