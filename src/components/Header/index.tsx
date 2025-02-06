@@ -29,10 +29,15 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
         'x4': 4,
         'x2': 2
       };
-      await downloadPreviewImage({ scale: scaleMap[selectedResolution] });
+      const success = await downloadPreviewImage({ scale: scaleMap[selectedResolution] });
+      message.destroy();
+      if (success) {
+        message.success('图片已成功保存！', 1);
+      } else {
+        message.error('保存图片失败，请稍后重试', 1);
+      }
     } finally {
       setIsDownloading(false);
-      message.destroy();
     }
   };
   return (

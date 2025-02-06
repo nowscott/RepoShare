@@ -1,5 +1,6 @@
 import domtoimage from 'dom-to-image';
 import { message } from 'antd';
+import dayjs from 'dayjs';
 
 interface DownloadOptions {
   scale?: number;
@@ -27,13 +28,13 @@ export const downloadPreviewImage = async (options: DownloadOptions = {}) => {
 
     const link = document.createElement('a');
     const repoName = document.querySelector('.app-content')?.querySelector('h1')?.textContent || 'repo';
-    link.download = `${repoName}.png`;
+    const timeCode = String(dayjs().unix()).slice(-6);
+    link.download = `${repoName}_${timeCode}.png`;
     link.href = dataUrl;
     link.click();
-    message.success('图片已成功保存！',1);
+    return true;
   } catch (error) {
     console.error('下载图片时出错:', error);
-    message.error('保存图片失败，请稍后重试',1);
-    throw error;
+    return false;
   }
 };
