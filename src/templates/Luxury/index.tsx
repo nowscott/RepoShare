@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.css';
 import { LuxuryTemplateProps } from '../../types/templates';
+import { QRCode } from 'antd';
 
 export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
   repoName = 'Repository Name',
@@ -21,11 +22,18 @@ export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
       <div className="content-wrapper">
         <div className="header">
           <h1 className="repo-name">{repoName}</h1>
-          {showHomepage && homepage && (
-            <a className="repo-homepage" href={homepage} target="_blank" rel="noopener noreferrer">
-              {homepage}
-            </a>
-          )}
+          <div className="homepage-section">
+            {showHomepage && homepage && (
+              <div className="qrcode-wrapper">
+                <QRCode
+                  value={homepage}
+                  errorLevel={'H'}
+                  size={88}
+                  color="#ce9b57"
+                />
+              </div>
+            )}
+          </div>
         </div>
 
         <p className="repo-description">{repoDescription}</p>
@@ -55,7 +63,7 @@ export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
 
         {showAuthorName && authorName && (
           <div className="author-info">
-            <span className="author-prefix">Created by</span>
+            <span className="author-prefix">Crafted with excellence by</span>
             <span className="author-name">{authorName}</span>
           </div>
         )}
