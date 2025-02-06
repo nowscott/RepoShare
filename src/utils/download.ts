@@ -31,10 +31,10 @@ export const downloadPreviewImage = async (options: DownloadOptions = {}) => {
     link.download = `${repoName}.png`;
     link.href = dataUrl;
     link.click();
-    message.success('图片已成功保存！');
+    message.success('图片已成功保存！',1);
   } catch (error) {
     console.error('下载图片时出错:', error);
-    message.error('保存图片失败，请稍后重试');
+    message.error('保存图片失败，请稍后重试',1);
     throw error;
   }
 };

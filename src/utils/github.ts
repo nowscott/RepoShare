@@ -1,6 +1,3 @@
-import { Octokit } from '@octokit/rest';
-
-const octokit = new Octokit();
 const CACHE_KEY = 'repo_data_cache';
 
 export interface RepoData {
@@ -30,20 +27,22 @@ export const fetchRepoInfo = async (owner: string, repo: string): Promise<RepoDa
   }
 
   try {
-    const { data: repoInfo } = await octokit.repos.get({
-      owner,
-      repo,
-    });
+    const [repoResponse, languagesResponse] = await Promise.all([
+      fetch(`https://gh.llkk.cc/https://api.github.com/repos/${owner}/${repo}`),
+      fetch(`https://gh.llkk.cc/https://api.github.com/repos/${owner}/${repo}/languages`)
+    ]);
 
-  const { data: languages } = await octokit.repos.listLanguages({
-    owner,
-    repo,
-  });
+    if (!repoResponse.ok || !languagesResponse.ok) {
+      throw new Error('获取仓库信息失败');
+    }
 
-  const sortedLanguages = Object.entries(languages)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 3)
-    .map(([lang]) => lang);
+    const repoInfo = await repoResponse.json();
+    const languages = await languagesResponse.json();
+
+    const sortedLanguages = Object.entries<number>(languages)
+      .sort(([, a], [, b]) => (b as number) - (a as number))
+      .slice(0, 3)
+      .map(([lang]) => lang);
 
   const repoData = {
     repoName: repoInfo.name,
