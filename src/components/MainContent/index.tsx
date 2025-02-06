@@ -40,11 +40,17 @@ const MainContent: React.FC<MainContentProps> = ({
     showAuthorName: true,
   });
 
+  const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
+
   const handleControlChange = (key: string, value: boolean) => {
     setControlSettings(prev => ({
       ...prev,
       [key]: value
     }));
+  };
+
+  const handleResolutionChange = (resolution: 'x8' | 'x4' | 'x2') => {
+    setSelectedResolution(resolution);
   };
 
   return (
@@ -78,6 +84,8 @@ const MainContent: React.FC<MainContentProps> = ({
         <ControlPanel
           controlSettings={controlSettings}
           onControlChange={handleControlChange}
+          onResolutionChange={handleResolutionChange}
+          selectedResolution={selectedResolution}
         />
       </Sider>
     </Layout>
