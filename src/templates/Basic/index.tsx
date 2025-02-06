@@ -32,29 +32,24 @@ export const BasicTemplate: React.FC<BasicTemplateProps> = ({
           <div className="stats-group">
             {showStars && (
               <div className="stat-item">
-                <span className="stat-label">Stars:</span>
-                <span className="stat-value">{repoStars}</span>
+                <span className="stat-value">★ {repoStars}</span>
               </div>
             )}
             {showForks && (
               <div className="stat-item">
-                <span className="stat-label">Forks:</span>
-                <span className="stat-value">{repoForks}</span>
+                <span className="stat-value">⑂ {repoForks}</span>
               </div>
             )}
           </div>
-          <div className="stat-item languages">
-            <span className="stat-label">Languages:</span>
-            <div className="language-tags">
-              {repoLanguages.map((lang, index) => (
-                <span key={index} className="language-tag">{lang}</span>
-              ))}
-            </div>
+          <div className="language-tags">
+            {repoLanguages.map((lang, index) => (
+              <span key={index} className="language-tag">{lang}</span>
+            ))}
           </div>
         </div>
         {showAuthorName && authorName && (
           <div className="author-info">
-            <span className="copyright">©</span>
+            <span className="copyright">Created by</span>
             <span className="author-name">{authorName}</span>
           </div>
         )}
