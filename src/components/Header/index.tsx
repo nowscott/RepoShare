@@ -1,6 +1,6 @@
-import React from 'react';
-import { Layout, Typography, Button } from 'antd';
-import { StepBackwardFilled, StepForwardFilled, ShareAltOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { Layout, Typography, Button, message } from 'antd';
+import { StepBackwardFilled, StepForwardFilled, DownloadOutlined } from '@ant-design/icons';
 import RepoInput from '../Input';
 import { downloadPreviewImage } from '../../utils/download';
 
@@ -17,6 +17,18 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse }) => {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    message.loading('正在渲染图片...', 0);
+    try {
+      await downloadPreviewImage();
+    } finally {
+      setIsDownloading(false);
+      message.destroy();
+    }
+  };
   return (
     <AntHeader
       className="app-header"
@@ -81,8 +93,9 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: '0 0 200px', justifyContent: 'flex-end' }}>
         <Button
           type="default"
-          icon={<ShareAltOutlined style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />}
-          onClick={() => downloadPreviewImage()}
+          icon={<DownloadOutlined style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />}
+          onClick={handleDownload}
+          disabled={isDownloading}
           style={{
             padding: 0,
             width: '32px',
