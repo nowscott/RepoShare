@@ -30,7 +30,7 @@
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
   box-sizing: border-box;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .basic-template .repo-name {
-  font-size: 36px;
+  font-size: 3.2rem;
   color: #1a365d;
   margin: 0;
   font-weight: 600;
@@ -51,12 +51,12 @@
 .basic-template .repo-homepage {
   color: #4a90e2;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 1.2rem;
 }  
 
 .basic-template .repo-description {
   color: #2d3748;
-  font-size: 16px;
+  font-size: 1.1rem;
   line-height: 1.5;
   margin: 0;
 }
@@ -64,7 +64,7 @@
 .basic-template .repo-stats {
   display: flex;
   justify-content: space-between;
-  padding: 16px 4px;
+  padding: 20px 4px;
   border-top: 1px solid #4a90e2;
 }
 
@@ -84,13 +84,13 @@
 .basic-template .stat-value {
   color: #E7A102;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 1.5rem;
   line-height: 1.2;
 }
 
 .basic-template .stat-label {
   color: #718096;
-  font-size: 14px;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
