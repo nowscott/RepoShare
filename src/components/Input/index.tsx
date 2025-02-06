@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Space, Button, message } from 'antd';
+import { Input, Space, Button } from 'antd';
 import { RedoOutlined } from '@ant-design/icons';
 
 interface InputProps {
@@ -8,16 +8,10 @@ interface InputProps {
 
 const RepoInput: React.FC<InputProps> = ({ onSubmit }) => {
   const [repoUrl, setRepoUrl] = useState('');
-  const [lastSubmittedUrl, setLastSubmittedUrl] = useState('');
 
   const handleSubmit = () => {
     const trimmedUrl = repoUrl.trim();
     if (trimmedUrl) {
-      if (trimmedUrl === lastSubmittedUrl) {
-        message.info('该仓库已在预览中');
-        return;
-      }
-      setLastSubmittedUrl(trimmedUrl);
       onSubmit(trimmedUrl);
     }
   };
