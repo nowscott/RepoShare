@@ -51,10 +51,13 @@ function App() {
           onRightSiderCollapse={() => setRightSiderCollapsed(!rightSiderCollapsed)}
           onSubmit={async (repoUrl) => {
             try {
+              if (!/^[\w.-]+\/[\w.-]+$/.test(repoUrl)) {
+                messageApi.error('仓库地址格式不正确，请使用 username/repo 格式',1);
+                return;
+              }
               const [owner, repo] = repoUrl.split('/');
               const cacheKey = `${owner}/${repo}`;
               const cachedData = localStorage.getItem(cacheKey);
-
               if (!cachedData) {
                 localStorage.clear();
               } else {
@@ -63,7 +66,6 @@ function App() {
                 messageApi.success('已从缓存加载仓库信息',1);
                 return;
               }
-              messageApi.loading('正在获取仓库信息...',1);
               const repoData = await fetchRepoInfo(owner, repo);
               setRepoData(repoData);
               localStorage.setItem(cacheKey, JSON.stringify(repoData));
