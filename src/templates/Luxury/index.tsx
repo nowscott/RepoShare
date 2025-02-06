@@ -27,9 +27,9 @@ export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
               <div className="qrcode-wrapper">
                 <QRCode
                   value={homepage}
-                  size={80}
+                  errorLevel={'H'}
+                  size={88}
                   color="#ce9b57"
-                  bgColor="rgba(11, 10, 9, 0.95)"
                 />
               </div>
             )}
@@ -63,7 +63,7 @@ export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
 
         {showAuthorName && authorName && (
           <div className="author-info">
-            <span className="author-prefix">Created by</span>
+            <span className="author-prefix">Crafted with excellence by</span>
             <span className="author-name">{authorName}</span>
           </div>
         )}
