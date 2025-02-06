@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Typography, Button, message } from 'antd';
 import { StepBackwardFilled, StepForwardFilled, DownloadOutlined } from '@ant-design/icons';
+import Bowser from 'bowser';
 import RepoInput from '../Input';
 import { downloadPreviewImage } from '../../utils/download';
 
@@ -21,6 +22,26 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async () => {
+    const browser = Bowser.getParser(window.navigator.userAgent);
+    const isValidBrowser = browser.satisfies({
+      chrome: '>=49',
+      firefox: '>=45'
+    });
+
+    if (!isValidBrowser) {
+      const browserName = browser.getBrowserName();
+      if (browserName === 'Safari') {
+        message.error('Safari浏览器暂不支持，这是由于Safari对SVG foreignObject标签采用了更严格的安全模型。请使用Chrome或Firefox浏览器。', 3);
+        return;
+      } else if (browserName === 'Internet Explorer') {
+        message.error('Internet Explorer浏览器不支持，这是由于IE不支持SVG foreignObject标签。请使用Chrome或Firefox浏览器。', 3);
+        return;
+      } else {
+        message.error('当前浏览器可能不兼容，建议使用Chrome 49+或Firefox 45+以获得最佳体验。', 3);
+        return;
+      }
+    }
+
     setIsDownloading(true);
     message.loading('正在渲染图片...', 0);
     try {
