@@ -7,7 +7,8 @@
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  font-family: '汇文明朝体', serif;
+  font-family:'Huiwen-mincho';
+  font-weight:'400'
 }
 
 .basic-template .content-wrapper {
