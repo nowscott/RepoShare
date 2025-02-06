@@ -16,9 +16,10 @@ interface HeaderProps {
   onLeftSiderCollapse: () => void;
   onRightSiderCollapse: () => void;
   selectedResolution: 'x8' | 'x4' | 'x2';
+  selectedFormat: 'png' | 'jpeg';
 }
 
-const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse, selectedResolution }) => {
+const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse, selectedResolution, selectedFormat }) => {
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async () => {
@@ -50,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
         'x4': 4,
         'x2': 2
       };
-      const success = await downloadPreviewImage({ scale: scaleMap[selectedResolution] });
+      const success = await downloadPreviewImage({ scale: scaleMap[selectedResolution], format: selectedFormat });
       message.destroy();
       if (success) {
         message.success('图片已成功保存！', 1);

@@ -18,7 +18,7 @@ interface ControlPanelProps {
 }
 
 type Resolution = 'x8' | 'x4' | 'x2';
-type Format = 'png' | 'jpeg' | 'svg';
+type Format = 'png' | 'jpeg';
 
 const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResolutionChange, onFormatChange, controlSettings, selectedResolution, selectedFormat = 'png' }) => {
   const controlItems = [
@@ -38,7 +38,6 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
   const formatItems = [
     { key: 'png', label: 'PNG' },
     { key: 'jpeg', label: 'JPEG' },
-    { key: 'svg', label: 'SVG' },
   ];
 
   const items = [

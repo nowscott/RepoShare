@@ -12,6 +12,7 @@ function App() {
   const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);
   const [rightSiderCollapsed, setRightSiderCollapsed] = useState(false);
   const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
+  const [selectedFormat, setSelectedFormat] = useState<'png' | 'jpeg'>('png');
   const [repoData, setRepoData] = useState({
     repoName: 'RepoShare',
     repoDescription: '一个用于生成 GitHub 仓库预览图的工具，支持卡片、深色、现代等多种精美模板。可自定义显示仓库信息、作者信息、语言标签等元素，让你的仓库展示更加专业和吸引人。适用于 README 展示、社交分享、项目文档等多种场景。',
@@ -51,6 +52,7 @@ function App() {
           onLeftSiderCollapse={() => setLeftSiderCollapsed(!leftSiderCollapsed)}
           onRightSiderCollapse={() => setRightSiderCollapsed(!rightSiderCollapsed)}
           selectedResolution={selectedResolution}
+          selectedFormat={selectedFormat}
           onSubmit={async (repoUrl) => {
             try {
               if (!/^[\w.-]+\/[\w.-]+$/.test(repoUrl)) {
@@ -87,6 +89,7 @@ function App() {
           onLeftSiderCollapse={() => setLeftSiderCollapsed(!leftSiderCollapsed)}
           onRightSiderCollapse={() => setRightSiderCollapsed(!rightSiderCollapsed)}
           onResolutionChange={setSelectedResolution}
+          onFormatChange={setSelectedFormat}
           repoData={repoData}
         />
       </Layout>

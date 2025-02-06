@@ -15,6 +15,7 @@ interface MainContentProps {
   onLeftSiderCollapse: () => void;
   onRightSiderCollapse: () => void;
   onResolutionChange?: (resolution: 'x8' | 'x4' | 'x2') => void;
+  onFormatChange?: (format: 'png' | 'jpeg') => void;
   repoData: {
     repoName: string;
     repoDescription: string;
@@ -34,6 +35,7 @@ const MainContent: React.FC<MainContentProps> = ({
   leftSiderCollapsed = false,
   rightSiderCollapsed = false,
   onResolutionChange,
+  onFormatChange,
   repoData
 }) => {
   const [controlSettings, setControlSettings] = useState({
@@ -45,7 +47,7 @@ const MainContent: React.FC<MainContentProps> = ({
   });
 
   const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
-  const [selectedFormat, setSelectedFormat] = useState<'png' | 'jpeg' | 'svg'>('png');
+  const [selectedFormat, setSelectedFormat] = useState<'png' | 'jpeg'>('png');
 
   React.useEffect(() => {
     onResolutionChange?.('x4');
@@ -63,8 +65,9 @@ const MainContent: React.FC<MainContentProps> = ({
     onResolutionChange?.(resolution);
   };
 
-  const handleFormatChange = (format: 'png' | 'jpeg' | 'svg') => {
+  const handleFormatChange = (format: 'png' | 'jpeg') => {
     setSelectedFormat(format);
+    onFormatChange?.(format);
   };
 
   return (
