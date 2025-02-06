@@ -45,6 +45,7 @@ const MainContent: React.FC<MainContentProps> = ({
   });
 
   const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
+  const [selectedFormat, setSelectedFormat] = useState<'png' | 'jpeg' | 'svg'>('png');
 
   React.useEffect(() => {
     onResolutionChange?.('x4');
@@ -60,6 +61,10 @@ const MainContent: React.FC<MainContentProps> = ({
   const handleResolutionChange = (resolution: 'x8' | 'x4' | 'x2') => {
     setSelectedResolution(resolution);
     onResolutionChange?.(resolution);
+  };
+
+  const handleFormatChange = (format: 'png' | 'jpeg' | 'svg') => {
+    setSelectedFormat(format);
   };
 
   return (
@@ -94,7 +99,9 @@ const MainContent: React.FC<MainContentProps> = ({
           controlSettings={controlSettings}
           onControlChange={handleControlChange}
           onResolutionChange={handleResolutionChange}
+          onFormatChange={handleFormatChange}
           selectedResolution={selectedResolution}
+          selectedFormat={selectedFormat}
         />
       </Sider>
     </Layout>

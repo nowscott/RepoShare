@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  font-family:'PangMenZhengDao-XiXian';font-weight:'400'
+  font-family:'快看世界体';font-weight:'400'
 }
 
 .luxury-template .watermark {
@@ -120,7 +120,6 @@
   border-radius: 20px;
   font-size: 0.95rem;
   border: 1px solid rgba(206, 155, 87, 0.2);
-  backdrop-filter: blur(5px);
   transition: all 0.3s ease;
 }
 
