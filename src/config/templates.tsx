@@ -1,6 +1,6 @@
 import React from 'react';
-import {BgColorsOutlined, CreditCardOutlined, BulbFilled, CrownOutlined, BuildFilled, SketchOutlined} from '@ant-design/icons';
-// import BasicTemplate from '../templates/Basic';
+import {BgColorsOutlined, CreditCardOutlined, BulbFilled, CrownOutlined, BuildFilled, SketchOutlined, GithubOutlined} from '@ant-design/icons';
+import BasicTemplate from '../templates/Basic';
 import InkTemplate from '../templates/Ink';
 import PixelTemplate from '../templates/Pixel';
 import CardTemplate from '../templates/Card';
@@ -17,6 +17,7 @@ export interface TemplateConfig {
 }
 
 const templates: TemplateConfig[] = [
+
   {
     id: 'card',
     name: 'Card',
@@ -37,6 +38,13 @@ const templates: TemplateConfig[] = [
     icon: <BuildFilled/>,
     description: '像素风格设计，为代码仓库增添复古感',
     component: PixelTemplate
+  },
+  {
+    id: 'basic',
+    name: 'Basic',
+    icon: <GithubOutlined />,
+    description: 'Github风格的基础模板，简洁实用',
+    component: BasicTemplate
   },
   {
     id: 'modern',
