@@ -34,40 +34,40 @@ jobs:
             CURRENT_VERSION="v0.0.0"
           fi
           if [ "$CURRENT_VERSION" != "v${PACKAGE_VERSION}" ]; then
-            echo "Version has changed, proceeding with release."
-            echo "RELEASE=true" >> $GITHUB_ENV
+            echo "版本已更新，准备发布新版本。"
+            echo "release=true" >> $GITHUB_OUTPUT
           else
-            echo "No version change detected."
-            echo "RELEASE=false" >> $GITHUB_ENV
+            echo "未检测到版本变更。"
+            echo "release=false" >> $GITHUB_OUTPUT
             exit 0
           fi
 
       - name: Configure Git
-        if: env.RELEASE == 'true'
+        if: steps.compare_versions.outputs.release == 'true'
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
       - name: Add package.json and commit changes
-        if: env.RELEASE == 'true'
+        if: steps.compare_versions.outputs.release == 'true'
         run: |
           git add package.json
-          git commit -m "Bump version to ${{ env.PACKAGE_VERSION }}" || echo "No changes to commit"
+          git commit -m "版本更新至 ${{ env.PACKAGE_VERSION }}" || echo "没有需要提交的更改"
 
       - name: Create and push tag
         if: env.RELEASE == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          NEW_VERSION=${{ env.PACKAGE_VERSION }}
+          NEW_VERSION=${{ steps.read_package_version.outputs.version }}
           git tag v$NEW_VERSION
           git push origin main --tags
 
       - name: Create Release
-        if: env.RELEASE == 'true'
+        if: steps.compare_versions.outputs.release == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: actions/create-release@v1
         with:
-          tag_name: v${{ env.PACKAGE_VERSION }}
-          release_name: v${{ env.PACKAGE_VERSION }}
+          tag_name: v${{ steps.read_package_version.outputs.version }}
+          release_name: v${{ steps.read_package_version.outputs.version }}
