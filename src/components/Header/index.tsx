@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Typography, Button, message } from 'antd';
 import { StepBackwardFilled, StepForwardFilled, DownloadOutlined } from '@ant-design/icons';
+import Bowser from 'bowser';
 import RepoInput from '../Input';
 import { downloadPreviewImage } from '../../utils/download';
 
@@ -15,12 +16,33 @@ interface HeaderProps {
   onLeftSiderCollapse: () => void;
   onRightSiderCollapse: () => void;
   selectedResolution: 'x8' | 'x4' | 'x2';
+  selectedFormat: 'png' | 'jpeg';
 }
 
-const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse, selectedResolution }) => {
+const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse, selectedResolution, selectedFormat }) => {
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async () => {
+    const browser = Bowser.getParser(window.navigator.userAgent);
+    const isValidBrowser = browser.satisfies({
+      chrome: '>=49',
+      firefox: '>=45'
+    });
+
+    if (!isValidBrowser) {
+      const browserName = browser.getBrowserName();
+      if (browserName === 'Safari') {
+        message.error('Safari浏览器暂不支持，这是由于Safari对SVG foreignObject标签采用了更严格的安全模型。请使用Chrome或Firefox浏览器。', 3);
+        return;
+      } else if (browserName === 'Internet Explorer') {
+        message.error('Internet Explorer浏览器不支持，这是由于IE不支持SVG foreignObject标签。请使用Chrome或Firefox浏览器。', 3);
+        return;
+      } else {
+        message.error('当前浏览器可能不兼容，建议使用Chrome 49+或Firefox 45+以获得最佳体验。', 3);
+        return;
+      }
+    }
+
     setIsDownloading(true);
     message.loading('正在渲染图片...', 0);
     try {
@@ -29,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
         'x4': 4,
         'x2': 2
       };
-      const success = await downloadPreviewImage({ scale: scaleMap[selectedResolution] });
+      const success = await downloadPreviewImage({ scale: scaleMap[selectedResolution], format: selectedFormat });
       message.destroy();
       if (success) {
         message.success('图片已成功保存！', 1);

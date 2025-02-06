@@ -35,9 +35,7 @@ export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
             )}
           </div>
         </div>
-
         <p className="repo-description">{repoDescription}</p>
-
         <div className="repo-stats">
           {showStars && (
             <div className="stat-item">
@@ -52,21 +50,21 @@ export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
             </div>
           )}
         </div>
-
-        <div className="language-tags">
-          {repoLanguages.map((lang, index) => (
-            <span key={index} className="language-tag">
-              {lang}
-            </span>
-          ))}
-        </div>
-
-        {showAuthorName && authorName && (
-          <div className="author-info">
-            <span className="author-prefix">Crafted with excellence by</span>
-            <span className="author-name">{authorName}</span>
+        <div className="footer-content">
+          <div className="language-tags">
+            {repoLanguages.map((lang, index) => (
+              <span key={index} className="language-tag">
+                {lang}
+              </span>
+            ))}
           </div>
-        )}
+          {showAuthorName && authorName && (
+            <div className="author-info">
+              <span className="author-prefix">Crafted with excellence by</span>
+              <span className="author-name">{authorName}</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

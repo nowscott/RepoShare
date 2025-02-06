@@ -4,16 +4,17 @@ import dayjs from 'dayjs';
 interface DownloadOptions {
   scale?: number;
   quality?: number;
+  format?: 'png' | 'jpeg';
 }
 
 export const downloadPreviewImage = async (options: DownloadOptions = {}) => {
   const previewElement = document.querySelector('.app-content > div') as HTMLElement;
   if (!previewElement) return;
 
-  const { scale = 8, quality = 1 } = options;
+  const { scale = 8, quality = 1, format = 'png' } = options;
 
-  try {    
-    const dataUrl = await domtoimage.toPng(previewElement, {
+  try {
+    const config = {
       height: previewElement.offsetHeight * scale,
       width: previewElement.offsetWidth * scale,
       style: {
@@ -23,12 +24,19 @@ export const downloadPreviewImage = async (options: DownloadOptions = {}) => {
         height: `${previewElement.offsetHeight}px`
       },
       quality
-    });
+    };
+
+    let dataUrl: string;
+    if (format === 'jpeg') {
+      dataUrl = await domtoimage.toJpeg(previewElement, config);
+    } else {
+      dataUrl = await domtoimage.toPng(previewElement, config);
+    }
 
     const link = document.createElement('a');
     const repoName = document.querySelector('.app-content')?.querySelector('h1')?.textContent || 'repo';
     const timeCode = String(dayjs().unix()).slice(-6);
-    link.download = `${repoName}_${timeCode}.png`;
+    link.download = `${repoName}_${timeCode}.${format}`;
     link.href = dataUrl;
     link.click();
     return true;

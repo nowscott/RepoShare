@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  font-family:'PangMenZhengDao-XiXian';font-weight:'400'
+  font-family:'快看世界体';font-weight:'400'
 }
 
 .luxury-template .watermark {
@@ -31,7 +31,7 @@
   -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(206, 155, 87, 0.25);
   border-radius: 16px;
-  padding: 36px;
+  padding: 32px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
               inset 0 0 60px rgba(206, 155, 87, 0.12),
               0 0 20px rgba(206, 155, 87, 0.1),
@@ -45,7 +45,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .luxury-template .repo-name {
@@ -62,28 +62,18 @@
   gap: 20px;
 }
 
-.luxury-template .repo-homepage {
-  color: rgba(206, 155, 87, 0.8);
-  text-decoration: none;
-  font-size: 1.1rem;
-  padding: 8px 20px;
-  border: 1px solid rgba(206, 155, 87, 0.3);
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-
 .luxury-template .repo-description {
   color: #e0e0e0;
   font-size: 1.2rem;
   line-height: 1.6;
+  margin: 0;
   letter-spacing: 0.02em;
 }
 
 .luxury-template .repo-stats {
   display: flex;
-  gap: 32px;
-  padding: 24px 0;
+  gap: 40px;
+  padding: 16px 0px;
 }
 
 .luxury-template .stat-item {
@@ -94,7 +84,7 @@
 }
 
 .luxury-template .stat-value {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: #ce9b57;
   text-shadow: 0 0 10px rgba(206, 155, 87, 0.2);
 }
@@ -110,7 +100,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .luxury-template .language-tag {
@@ -120,8 +110,14 @@
   border-radius: 20px;
   font-size: 0.95rem;
   border: 1px solid rgba(206, 155, 87, 0.2);
-  backdrop-filter: blur(5px);
   transition: all 0.3s ease;
+}
+
+.luxury-template .footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .luxury-template .author-info {

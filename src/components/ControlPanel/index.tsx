@@ -1,10 +1,11 @@
 import React from 'react';
 import { Menu, Checkbox } from 'antd';
-import { StarOutlined, ForkOutlined, HomeOutlined, UserOutlined, IdcardOutlined, ExpandOutlined } from '@ant-design/icons';
+import { StarOutlined, ForkOutlined, HomeOutlined, UserOutlined, IdcardOutlined, ExpandOutlined, FileImageOutlined } from '@ant-design/icons';
 
 interface ControlPanelProps {
   onControlChange: (key: string, value: boolean) => void;
   onResolutionChange: (resolution: Resolution) => void;
+  onFormatChange?: (format: Format) => void;
   controlSettings: {
     showForks: boolean;
     showStars: boolean;
@@ -13,11 +14,13 @@ interface ControlPanelProps {
     showAuthorName: boolean;
   };
   selectedResolution: Resolution;
+  selectedFormat?: Format;
 }
 
 type Resolution = 'x8' | 'x4' | 'x2';
+type Format = 'png' | 'jpeg';
 
-const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResolutionChange, controlSettings, selectedResolution }) => {
+const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResolutionChange, onFormatChange, controlSettings, selectedResolution, selectedFormat = 'png' }) => {
   const controlItems = [
     { key: 'showStars', label: 'Star 数', icon: <StarOutlined /> },
     { key: 'showForks', label: 'Fork 数', icon: <ForkOutlined /> },
@@ -30,6 +33,11 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
     { key: 'x8', label: '超高清' },
     { key: 'x4', label: '高清' },
     { key: 'x2', label: '标清' },
+  ];
+
+  const formatItems = [
+    { key: 'png', label: 'PNG' },
+    { key: 'jpeg', label: 'JPEG' },
   ];
 
   const items = [
@@ -46,6 +54,16 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
             key: item.key,
             label: item.label,
             onClick: () => onResolutionChange(item.key as Resolution)
+          }))
+        },
+        {
+          key: 'format',
+          label: '文件格式',
+          icon: <FileImageOutlined />,
+          children: formatItems.map((item) => ({
+            key: item.key,
+            label: item.label,
+            onClick: () => onFormatChange?.(item.key as Format)
           }))
         },
         {
@@ -76,6 +94,10 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
 
   if (selectedResolution) {
     selectedKeys.push(selectedResolution);
+  }
+
+  if (selectedFormat) {
+    selectedKeys.push(selectedFormat);
   }
 
   return (
