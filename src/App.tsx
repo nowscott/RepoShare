@@ -1,4 +1,4 @@
-import { Layout, ConfigProvider, theme, message } from 'antd';
+import { Layout, ConfigProvider, theme, notification } from 'antd';
 import { useState, useEffect } from 'react';
 import 'antd/dist/reset.css';
 import Header from './components/Header';
@@ -8,7 +8,7 @@ import { fetchRepoInfo } from './utils/github';
 function App() {
   const [selectedTemplate, setSelectedTemplate] = useState('card');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
+  const [notificationApi, contextHolder] = notification.useNotification();
   const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);
   const [rightSiderCollapsed, setRightSiderCollapsed] = useState(false);
   const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
@@ -56,7 +56,11 @@ function App() {
           onSubmit={async (repoUrl) => {
             try {
               if (!/^[\w.-]+\/[\w.-]+$/.test(repoUrl)) {
-                messageApi.error('仓库地址格式不正确，请使用 username/repo 格式',1);
+                notificationApi.error({
+                  message: '格式错误',
+                  description: '仓库地址格式不正确，请使用 username/repo 格式',
+                  placement: 'bottomRight'
+                });
                 return;
               }
               const [owner, repo] = repoUrl.split('/');
@@ -67,16 +71,28 @@ function App() {
               } else {
                 const parsedData = JSON.parse(cachedData);
                 setRepoData(parsedData);
-                messageApi.success('已从缓存加载仓库信息',1);
+                notificationApi.success({
+                  message: '加载成功',
+                  description: '已从缓存加载仓库信息',
+                  placement: 'bottomRight'
+                });
                 return;
               }
               const repoData = await fetchRepoInfo(owner, repo);
               setRepoData(repoData);
               localStorage.setItem(cacheKey, JSON.stringify(repoData));
-              messageApi.success('仓库信息获取成功！',1);
+              notificationApi.success({
+                message: '获取成功',
+                description: '仓库信息获取成功！',
+                placement: 'bottomRight'
+              });
             } catch (error) {
               console.error('获取仓库信息失败:', error);
-              messageApi.error('获取仓库信息失败，请检查仓库地址是否正确',1);
+              notificationApi.error({
+                message: '获取失败',
+                description: '获取仓库信息失败，请检查仓库地址是否正确',
+                placement: 'bottomRight'
+              });
             }
           }}
         />
