@@ -1,5 +1,4 @@
 import domtoimage from 'dom-to-image';
-import { message } from 'antd';
 import dayjs from 'dayjs';
 
 interface DownloadOptions {
