@@ -23,6 +23,7 @@ jobs:
         id: read_package_version
         run: |
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo "当前 package.json 版本号: $PACKAGE_VERSION"
           echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
 
       - name: Compare versions
