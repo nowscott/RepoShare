@@ -48,6 +48,7 @@ const MainContent: React.FC<MainContentProps> = ({
 
   const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
   const [selectedFormat, setSelectedFormat] = useState<'png' | 'jpeg'>('png');
+  const [selectedLayout, setSelectedLayout] = useState<'default' | 'portrait'>('default');
 
   React.useEffect(() => {
     onResolutionChange?.('x4');
@@ -70,6 +71,10 @@ const MainContent: React.FC<MainContentProps> = ({
     onFormatChange?.(format);
   };
 
+  const handleLayoutChange = (layout: 'default' | 'portrait') => {
+    setSelectedLayout(layout);
+  };
+
   return (
     <Layout hasSider>
       <Sider
@@ -86,8 +91,12 @@ const MainContent: React.FC<MainContentProps> = ({
         />
       </Sider>
       <Content className="app-content" style={{ padding: '24px', minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: isDarkMode ? '#141414' : '#fff', borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`, borderRight: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`,  overflow: 'auto' }}>
-        <div style={{ width: '750px', flex: 'none' }}>
-          <Preview selectedTemplate={selectedTemplate} {...repoData} {...controlSettings} />
+        <div style={{ 
+          width: selectedLayout === 'portrait' ? '540px' : '750px', 
+          height: selectedLayout === 'portrait' ? '720px' : 'auto',
+          flex: 'none' 
+        }}>
+          <Preview selectedTemplate={selectedTemplate} layout={selectedLayout} {...repoData} {...controlSettings} />
         </div>
       </Content>
       <Sider
@@ -103,8 +112,10 @@ const MainContent: React.FC<MainContentProps> = ({
           onControlChange={handleControlChange}
           onResolutionChange={handleResolutionChange}
           onFormatChange={handleFormatChange}
+          onLayoutChange={handleLayoutChange}
           selectedResolution={selectedResolution}
           selectedFormat={selectedFormat}
+          selectedLayout={selectedLayout}
         />
       </Sider>
     </Layout>

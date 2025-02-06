@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import { BasicTemplateProps } from '../../types/templates';
 
-export const BasicTemplate: React.FC<BasicTemplateProps> = ({
+export const BasicTemplate: React.FC<BasicTemplateProps & { layout?: 'default' | 'portrait' }> = ({
   repoName = 'Repository Name',
   repoDescription = 'Repository Description',
   repoStars = 0,
@@ -13,10 +13,11 @@ export const BasicTemplate: React.FC<BasicTemplateProps> = ({
   showStars = true,
   showForks = true,
   showHomepage = true,
-  showAuthorName = true
+  showAuthorName = true,
+  layout = 'default'
 }) => {
   return (
-    <div className="basic-template">
+    <div className={`basic ${layout === 'portrait' ? 'portrait' : ''}`}>
       <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content-wrapper">
         <div className="header">
