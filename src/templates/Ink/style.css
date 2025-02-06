@@ -1,0 +1,128 @@
+.ink-template {
+  background: linear-gradient(135deg, #003153 0%, #f5f7fa 100%);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  font-family:'Huiwen-mincho';
+  font-weight:'400'
+}
+
+.ink-template .watermark {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ink-template .content-wrapper {
+  backdrop-filter: blur(10px);
+  width: 96%;
+  padding: 32px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #003153 100%);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 49, 83, 0.15);
+}
+
+.ink-template .author-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #78b4dc;
+  gap: 6px;
+}
+
+.ink-template .author-name {
+  font-weight: 600;
+  color: #78b4dc;
+}
+
+.ink-template .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ink-template .repo-name {
+  font-size: 2.8rem;
+  color: #2c3e50;
+  margin: 0;
+  font-weight: bold;
+}
+
+.ink-template .repo-homepage {
+  color: #78b4dc;
+  text-decoration: none;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.ink-template .repo-description {
+  color: #2c3e50;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.ink-template .repo-stats {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 2px solid rgba(44, 62, 80, 0.1);
+}
+
+.ink-template .stats-group {
+  display: flex;
+  gap: 30px;
+}
+
+.ink-template .stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ink-template .stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+}
+
+.ink-template .stat-value {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.ink-template .language-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.ink-template .language-tag {
+  background-color: #f49958;
+  color: #2c3e50;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  display: inline-block;
+  font-weight: 500;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Typography, Button, message } from 'antd';
+import { Layout, Typography, Button, notification } from 'antd';
 import { StepBackwardFilled, StepForwardFilled, DownloadOutlined } from '@ant-design/icons';
 import Bowser from 'bowser';
 import RepoInput from '../Input';
@@ -21,6 +21,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse, selectedResolution, selectedFormat }) => {
   const [isDownloading, setIsDownloading] = useState(false);
+  const [notificationApi, contextHolder] = notification.useNotification();
 
   const handleDownload = async () => {
     const browser = Bowser.getParser(window.navigator.userAgent);
@@ -32,19 +33,47 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
     if (!isValidBrowser) {
       const browserName = browser.getBrowserName();
       if (browserName === 'Safari') {
-        message.error('Safari浏览器暂不支持，这是由于Safari对SVG foreignObject标签采用了更严格的安全模型。请使用Chrome或Firefox浏览器。', 3);
+        notificationApi.open({
+          message: '浏览器不支持',
+          description: 'Safari浏览器暂不支持，这是由于Safari对SVG foreignObject标签采用了更严格的安全模型。请使用Chrome或Firefox浏览器。',
+          placement: 'bottomRight',
+          duration: 5,
+          showProgress: true,
+          pauseOnHover: true
+        });
         return;
       } else if (browserName === 'Internet Explorer') {
-        message.error('Internet Explorer浏览器不支持，这是由于IE不支持SVG foreignObject标签。请使用Chrome或Firefox浏览器。', 3);
+        notificationApi.open({
+          message: '浏览器不支持',
+          description: 'Internet Explorer浏览器不支持，这是由于IE不支持SVG foreignObject标签。请使用Chrome或Firefox浏览器。',
+          placement: 'bottomRight',
+          duration: 5,
+          showProgress: true,
+          pauseOnHover: true
+        });
         return;
       } else {
-        message.error('当前浏览器可能不兼容，建议使用Chrome 49+或Firefox 45+以获得最佳体验。', 3);
+        notificationApi.open({
+          message: '浏览器可能不兼容',
+          description: '当前浏览器可能不兼容，建议使用Chrome 49+或Firefox 45+以获得最佳体验。',
+          placement: 'bottomRight',
+          duration: 5,
+          showProgress: true,
+          pauseOnHover: true
+        });
         return;
       }
     }
 
     setIsDownloading(true);
-    message.loading('正在渲染图片...', 0);
+    const key = 'rendering';
+    notificationApi.info({
+      key,
+      message: '正在渲染',
+      description: '正在渲染图片...',
+      placement: 'bottomRight',
+      duration: 3
+    });
     try {
       const scaleMap = {
         'x8': 8,
@@ -52,11 +81,18 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
         'x2': 2
       };
       const success = await downloadPreviewImage({ scale: scaleMap[selectedResolution], format: selectedFormat });
-      message.destroy();
       if (success) {
-        message.success('图片已成功保存！', 1);
+        notificationApi.success({
+          message: '保存成功',
+          description: '图片已成功保存！',
+          placement: 'bottomRight'
+        });
       } else {
-        message.error('保存图片失败，请稍后重试', 1);
+        notificationApi.error({
+          message: '保存失败',
+          description: '保存图片失败，请稍后重试',
+          placement: 'bottomRight'
+        });
       }
     } finally {
       setIsDownloading(false);
@@ -79,6 +115,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
         borderBottom: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`
       }}
     >
+      {contextHolder}
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: '0 0 200px', justifyContent: 'flex-start' }}>        
         <Button
           type="default"

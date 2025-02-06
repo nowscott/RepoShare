@@ -27,9 +27,10 @@ export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
               <div className="qrcode-wrapper">
                 <QRCode
                   value={homepage}
-                  errorLevel={'H'}
-                  size={88}
+                  errorLevel='M'
+                  size={64}
                   color="#ce9b57"
+                  bordered={false}
                 />
               </div>
             )}
