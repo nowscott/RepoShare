@@ -1,8 +1,8 @@
-.pixel-template {
+.pixel {
   width: 100%;
   height: 100%;
   min-height: 420px;
-  padding: 40px;
+  padding: 36px;
   background: repeating-conic-gradient(from 0deg at 0 0, #2a3042 0% 25%, #3d4760 25% 50%) 50px 50px / 100px 100px;
   image-rendering: pixelated;
   color: #ffffff;
@@ -14,7 +14,7 @@
   position: relative;
 }
 
-.pixel-template .watermark {
+.pixel .watermark {
   position: absolute;
   top: 12px;
   left: 50%;
@@ -24,18 +24,18 @@
   font-weight: 500;
 }
 
-.pixel-template .content {
+.pixel .content {
   width: 100%;
   max-width: 800px;
   background: rgba(13, 17, 23, 0.9);
   backdrop-filter: blur(12px);
   border: 4px solid rgba(255, 255, 255, 0.35);
-  padding: 48px;
+  padding: 40px;
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.5);
   color: #ffffff;
 }
 
-.pixel-template .repo-name {
+.pixel .repo-name {
   font-size: 3rem;
   margin: 0 0 1.5rem;
   color: #58a6ff;
@@ -44,7 +44,7 @@
   line-height: 1.2;
 }
 
-.pixel-template .repo-description {
+.pixel .repo-description {
   font-size: 1.3rem;
   margin: 0;
   color: #ffffff;
@@ -52,7 +52,7 @@
   letter-spacing: 0.01em;
 }
 
-.pixel-template .repo-stats {
+.pixel .repo-stats {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,28 +70,28 @@
   align-items: flex-start;
 }
 
-.pixel-template .stat-item {
+.pixel .stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.8rem;
 }
 
-.pixel-template .stat-value {
+.pixel .stat-value {
   font-size: 2rem;
   font-weight: bold;
   color: #58a6ff;
   text-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
 }
 
-.pixel-template .stat-label {
+.pixel .stat-label {
   font-size: 1rem;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
-.pixel-template .language-tags {
+.pixel .language-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -99,14 +99,14 @@
   justify-content: flex-end;
 }
 
-.pixel-template .homepage-section {
+.pixel .homepage-section {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
 }
 
 
-.pixel-template .language-tag {
+.pixel .language-tag {
   background: rgba(31, 111, 235, 0.2);
   color: #58a6ff;
   padding: 8px 20px;
@@ -118,7 +118,7 @@
   transition: all 0.3s ease;
 }
 
-.pixel-template .footer {
+.pixel .footer {
   margin: 0;
   display: flex;
   justify-content: space-between;
@@ -127,13 +127,13 @@
   gap: 1.5rem;
 }
 
-.pixel-template .homepage-section {
+.pixel .homepage-section {
   display: flex;
   justify-content: flex-start;
   margin-top: 2rem;
 }
 
-.pixel-template .author-info {
+.pixel .author-info {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -142,7 +142,7 @@
   margin-left: auto;
 }
 
-.pixel-template .author-avatar {
+.pixel .author-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -150,9 +150,49 @@
   transition: all 0.3s ease;
 }
 
-.pixel-template .author-name {
+.pixel .author-name {
   color: #ffffff;
   font-size: 1.1rem;
   font-weight: 500;
   transition: color 0.3s ease;
+}
+
+
+
+/* 竖屏样式 */
+.portrait {
+  width: 540px;
+  height: 720px;
+}
+
+.portrait .content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.portrait .repo-stats {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.portrait .stat-items {
+  width: 100%;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.portrait .language-tags {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.portrait .footer {
+  margin-top: 0;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
 }

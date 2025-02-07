@@ -3,7 +3,7 @@ import './style.css';
 import { PixelTemplateProps } from '../../types/templates';
 import { QRCode } from 'antd';
 
-export const PixelTemplate: React.FC<PixelTemplateProps> = ({
+export const PixelTemplate: React.FC<PixelTemplateProps & { layout?: 'default' | 'portrait' }> = ({
   repoName = 'Repository Name',
   repoDescription = 'Repository Description',
   repoStars = 0,
@@ -16,10 +16,11 @@ export const PixelTemplate: React.FC<PixelTemplateProps> = ({
   showForks = true,
   showHomepage = true,
   showAuthorAvatar = true,
-  showAuthorName = true
+  showAuthorName = true,
+  layout = 'default'
 }) => {
   return (
-    <div className="pixel-template">
+    <div className={`pixel ${layout === 'portrait' ? 'portrait' : ''}`}>
       <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content">
         <h1 className="repo-name">{repoName}</h1>
