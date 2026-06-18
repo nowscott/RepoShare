@@ -8,7 +8,8 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  font-family:'快看世界体';font-weight:'400'
+  font-family: 'KingHwa_OldSong', 'Huiwen-mincho', serif;
+  font-weight: 400;
 }
 
 .luxury-template .watermark {

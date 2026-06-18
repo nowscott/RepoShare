@@ -1,103 +1,105 @@
-import React, { useState } from 'react';
-import Sidebar from '../Sidebar';
-import Preview from '../Preview';
-import ControlPanel from '../ControlPanel';
+import { useEffect } from 'react';
 import templates from '../../config/templates';
 import { RepoData } from '../../utils/github';
+import { CanvasLayout, ContentSettings, EditorTool, ExportFormat, Resolution } from '../../types/editor';
+import ToolRail from '../ToolRail';
+import Inspector from '../Inspector';
+import MobileToolbar from '../MobileToolbar';
+import CanvasStage from '../CanvasStage';
 
 interface MainContentProps {
   selectedTemplate: string;
   onTemplateSelect: (templateId: string) => void;
-  isDarkMode: boolean;
-  leftSiderCollapsed?: boolean;
-  rightSiderCollapsed?: boolean;
-  onLeftSiderCollapse: () => void;
-  onRightSiderCollapse: () => void;
-  onResolutionChange?: (resolution: 'x8' | 'x4' | 'x2') => void;
-  onFormatChange?: (format: 'png' | 'jpeg') => void;
+  activeTool: EditorTool | null;
+  onToolChange: (tool: EditorTool | null) => void;
+  contentSettings: ContentSettings;
+  onContentChange: (key: keyof ContentSettings, value: boolean) => void;
+  selectedResolution: Resolution;
+  selectedFormat: ExportFormat;
+  selectedLayout: CanvasLayout;
+  onResolutionChange: (resolution: Resolution) => void;
+  onFormatChange: (format: ExportFormat) => void;
+  onLayoutChange: (layout: CanvasLayout) => void;
+  onDownload: () => void;
+  isDownloading: boolean;
   repoData: RepoData;
 }
 
 const MainContent: React.FC<MainContentProps> = ({
   selectedTemplate,
   onTemplateSelect,
-  leftSiderCollapsed = false,
-  rightSiderCollapsed = false,
+  activeTool,
+  onToolChange,
+  contentSettings,
+  onContentChange,
+  selectedResolution,
+  selectedFormat,
+  selectedLayout,
   onResolutionChange,
   onFormatChange,
-  repoData
+  onLayoutChange,
+  onDownload,
+  isDownloading,
+  repoData,
 }) => {
-  const [controlSettings, setControlSettings] = useState({
-    showForks: true,
-    showStars: true,
-    showHomepage: true,
-    showAuthorAvatar: true,
-    showAuthorName: true,
-  });
-
-  const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
-  const [selectedFormat, setSelectedFormat] = useState<'png' | 'jpeg'>('png');
-  const [selectedLayout, setSelectedLayout] = useState<'default' | 'portrait'>('default');
-
-  const handleControlChange = (key: string, value: boolean) => {
-    setControlSettings(prev => ({
-      ...prev,
-      [key]: value
-    }));
-  };
-
-  const handleResolutionChange = (resolution: 'x8' | 'x4' | 'x2') => {
-    setSelectedResolution(resolution);
-    onResolutionChange?.(resolution);
-  };
-
-  const handleFormatChange = (format: 'png' | 'jpeg') => {
-    setSelectedFormat(format);
-    onFormatChange?.(format);
-  };
-
-  const handleLayoutChange = (layout: 'default' | 'portrait') => {
-    setSelectedLayout(layout);
-  };
-
   const selectedTemplateConfig = templates.find((template) => template.id === selectedTemplate);
 
+  useEffect(() => {
+    if (!activeTool) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onToolChange(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeTool, onToolChange]);
+
+  const toggleTool = (tool: EditorTool) => {
+    onToolChange(activeTool === tool ? null : tool);
+  };
+
   return (
-    <div className="flex min-h-[calc(100vh-76px)] bg-transparent max-md:flex-col">
-      {!leftSiderCollapsed && (
-        <aside className="m-[18px] w-[184px] shrink-0 overflow-hidden rounded-lg border border-black/10 bg-white/85 shadow-[0_18px_50px_rgba(25,23,18,0.08)] backdrop-blur-md max-md:m-3 max-md:w-auto">
-          <Sidebar
+    <div className="editor-shell">
+      <ToolRail activeTool={activeTool} onToolChange={toggleTool} />
+
+      {activeTool && (
+        <>
+          <button
+            type="button"
+            className="inspector-scrim"
+            onClick={() => onToolChange(null)}
+            aria-label="关闭设置遮罩"
+          />
+          <Inspector
+            activeTool={activeTool}
             selectedTemplate={selectedTemplate}
             onTemplateSelect={onTemplateSelect}
-          />
-        </aside>
-      )}
-      <main className="canvas-grid flex min-w-0 flex-1 items-center justify-center overflow-auto p-6 max-md:min-h-[640px] max-md:items-start max-md:justify-start max-md:p-3">
-        <div className="box-content shrink-0 rounded-lg border border-black/10 bg-white/65 p-3.5 shadow-[0_24px_80px_rgba(25,23,18,0.12)]" style={{
-          width: selectedLayout === 'portrait' ? '540px' : '750px', 
-          height: selectedLayout === 'portrait' ? '720px' : 'auto',
-          boxSizing: 'content-box',
-        }}>
-          <div className="size-full overflow-hidden rounded-lg bg-white" data-preview-root="true">
-            <Preview selectedTemplate={selectedTemplate} layout={selectedLayout} {...repoData} {...controlSettings} />
-          </div>
-        </div>
-      </main>
-      {!rightSiderCollapsed && (
-        <aside className="m-[18px] w-[184px] shrink-0 overflow-hidden rounded-lg border border-black/10 bg-white/85 shadow-[0_18px_50px_rgba(25,23,18,0.08)] backdrop-blur-md max-md:m-3 max-md:w-auto">
-          <ControlPanel
-            controlSettings={controlSettings}
-            onControlChange={handleControlChange}
-            onResolutionChange={handleResolutionChange}
-            onFormatChange={handleFormatChange}
-            onLayoutChange={handleLayoutChange}
+            contentSettings={contentSettings}
+            onContentChange={onContentChange}
             selectedResolution={selectedResolution}
             selectedFormat={selectedFormat}
             selectedLayout={selectedLayout}
+            onResolutionChange={onResolutionChange}
+            onFormatChange={onFormatChange}
+            onLayoutChange={onLayoutChange}
             supportsAuthorAvatar={Boolean(selectedTemplateConfig?.supportsAuthorAvatar)}
+            onClose={() => onToolChange(null)}
           />
-        </aside>
+        </>
       )}
+
+      <CanvasStage
+        selectedTemplate={selectedTemplate}
+        layout={selectedLayout}
+        {...repoData}
+        {...contentSettings}
+      />
+
+      <MobileToolbar
+        activeTool={activeTool}
+        onToolChange={toggleTool}
+        onDownload={onDownload}
+        isDownloading={isDownloading}
+      />
     </div>
   );
 };

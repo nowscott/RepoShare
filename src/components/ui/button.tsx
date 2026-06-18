@@ -4,19 +4,20 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-colors outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 focus-visible:ring-2 focus-visible:ring-black/20',
+  'inline-flex shrink-0 items-center justify-center gap-[var(--rs-space-100)] whitespace-nowrap rounded-[var(--rs-radius-medium)] text-sm font-medium transition-colors outline-none disabled:pointer-events-none disabled:border-[var(--rs-color-border-disabled)] disabled:bg-[var(--rs-color-surface-disabled)] disabled:text-[var(--rs-color-text-disabled)] [&_svg]:pointer-events-none [&_svg]:size-[var(--rs-icon-size)] [&_svg]:shrink-0 focus-visible:ring-2 focus-visible:ring-[var(--rs-color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--rs-color-surface)]',
   {
     variants: {
       variant: {
-        default: 'bg-neutral-950 [color:#fff] shadow-sm hover:bg-neutral-800',
-        secondary: 'bg-white text-neutral-950 shadow-sm ring-1 ring-black/10 hover:bg-neutral-100',
-        ghost: 'text-neutral-700 hover:bg-black/5 hover:text-neutral-950',
-        outline: 'border border-black/10 bg-white/80 text-neutral-950 shadow-sm hover:bg-white',
+        default: 'bg-[var(--rs-color-accent)] text-white hover:bg-[var(--rs-color-accent-hover)] active:bg-[var(--rs-color-accent-active)]',
+        secondary: 'border border-[var(--rs-color-border)] bg-[var(--rs-color-surface-raised)] text-[var(--rs-color-text)] hover:bg-[var(--rs-color-surface-hover)] active:bg-[var(--rs-color-surface-active)]',
+        ghost: 'text-[var(--rs-color-text-secondary)] hover:bg-[var(--rs-color-surface-hover)] hover:text-[var(--rs-color-text)] active:bg-[var(--rs-color-surface-active)]',
+        outline: 'border border-[var(--rs-color-border)] bg-[var(--rs-color-surface)] text-[var(--rs-color-text-secondary)] hover:border-[var(--rs-color-border-strong)] hover:bg-[var(--rs-color-surface-hover)] hover:text-[var(--rs-color-text)] active:bg-[var(--rs-color-surface-active)]',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 px-3',
-        icon: 'size-9',
+        default: 'h-[var(--rs-control-height-primary)] px-[var(--rs-space-200)]',
+        sm: 'h-[var(--rs-control-height)] px-[var(--rs-space-150)]',
+        icon: 'size-[var(--rs-control-height-primary)]',
+        touch: 'h-[var(--rs-control-height-touch)] px-[var(--rs-space-200)]',
       },
     },
     defaultVariants: {
@@ -35,13 +36,11 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
-    const { style, ...buttonProps } = props;
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
-        style={{ ...(variant === 'default' ? { color: '#fff' } : {}), ...style }}
         ref={ref}
-        {...buttonProps}
+        {...props}
       />
     );
   },

@@ -1,40 +1,34 @@
-import React, { useState } from 'react';
-import { RotateCw } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, LoaderCircle } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
 interface InputProps {
-  onSubmit: (url: string) => void;
+  onSubmit: (url: string) => Promise<void> | void;
+  isLoading?: boolean;
 }
 
-const RepoInput: React.FC<InputProps> = ({ onSubmit }) => {
+const RepoInput: React.FC<InputProps> = ({ onSubmit, isLoading = false }) => {
   const [repoUrl, setRepoUrl] = useState('');
 
   const handleSubmit = () => {
     const trimmedUrl = repoUrl.trim();
-    if (trimmedUrl) {
-      onSubmit(trimmedUrl);
-    }
+    if (trimmedUrl && !isLoading) onSubmit(trimmedUrl);
   };
 
   return (
-    <div className="flex w-full max-w-[520px] items-center rounded-full border border-black/10 bg-white p-1 shadow-[0_14px_40px_rgba(25,23,18,0.08)]">
+    <div className="repo-input">
       <Input
-        placeholder="username/repo"
+        aria-label="GitHub 仓库"
+        placeholder="owner/repository"
         value={repoUrl}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setRepoUrl(event.target.value)}
-        className="h-10 flex-1 rounded-full border-0 bg-transparent shadow-none focus-visible:ring-0"
-        onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
+        onChange={(event) => setRepoUrl(event.target.value)}
+        onKeyDown={(event) => {
           if (event.key === 'Enter') handleSubmit();
         }}
       />
-      <Button 
-        onClick={handleSubmit} 
-        size="icon"
-        className="rounded-full"
-        aria-label="获取仓库信息"
-      >
-        <RotateCw className="size-4" />
+      <Button type="button" onClick={handleSubmit} size="icon" disabled={isLoading} aria-label="获取仓库信息">
+        {isLoading ? <LoaderCircle className="animate-spin" /> : <ArrowRight />}
       </Button>
     </div>
   );

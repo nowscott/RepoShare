@@ -17,7 +17,7 @@ const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        'z-50 min-w-40 overflow-hidden rounded-lg border border-black/10 bg-white p-1 text-neutral-950 shadow-xl data-[state=open]:animate-in data-[state=closed]:animate-out',
+        'z-[var(--rs-z-sheet)] min-w-40 overflow-hidden rounded-[var(--rs-radius-large)] border border-[var(--rs-color-border)] bg-[var(--rs-color-surface)] p-[var(--rs-space-050)] text-[var(--rs-color-text)] shadow-[var(--rs-shadow-overlay)] data-[state=open]:animate-in data-[state=closed]:animate-out',
         className,
       )}
       {...props}
@@ -33,7 +33,7 @@ const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex cursor-default select-none items-center rounded-md px-2 py-2 text-sm font-semibold outline-none transition-colors focus:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex min-h-9 cursor-default select-none items-center rounded-[var(--rs-radius-medium)] px-[var(--rs-space-100)] text-sm font-medium outline-none transition-colors focus:bg-[var(--rs-color-surface-hover)] data-[disabled]:pointer-events-none data-[disabled]:text-[var(--rs-color-text-disabled)]',
       className,
     )}
     {...props}
@@ -48,7 +48,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      'relative flex cursor-default select-none items-center rounded-md py-2 pl-8 pr-2 text-sm font-semibold outline-none transition-colors focus:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex min-h-9 cursor-default select-none items-center rounded-[var(--rs-radius-medium)] py-[var(--rs-space-100)] pl-[var(--rs-space-400)] pr-[var(--rs-space-100)] text-sm font-medium outline-none transition-colors focus:bg-[var(--rs-color-surface-hover)] data-[disabled]:pointer-events-none data-[disabled]:text-[var(--rs-color-text-disabled)]',
       className,
     )}
     {...props}
@@ -70,7 +70,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
-    className={cn('flex cursor-default select-none items-center rounded-md px-2 py-2 text-sm font-semibold outline-none focus:bg-neutral-100', className)}
+    className={cn('flex min-h-9 cursor-default select-none items-center rounded-[var(--rs-radius-medium)] px-[var(--rs-space-100)] text-sm font-medium outline-none focus:bg-[var(--rs-color-surface-hover)]', className)}
     {...props}
   >
     {children}
@@ -85,7 +85,7 @@ const DropdownMenuSubContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.SubContent
     ref={ref}
-    className={cn('z-50 min-w-40 overflow-hidden rounded-lg border border-black/10 bg-white p-1 text-neutral-950 shadow-xl', className)}
+    className={cn('z-[var(--rs-z-sheet)] min-w-40 overflow-hidden rounded-[var(--rs-radius-large)] border border-[var(--rs-color-border)] bg-[var(--rs-color-surface)] p-[var(--rs-space-050)] text-[var(--rs-color-text)] shadow-[var(--rs-shadow-overlay)]', className)}
     {...props}
   />
 ));

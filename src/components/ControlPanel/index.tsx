@@ -1,124 +1,132 @@
-import React from 'react';
-import { Badge, ChevronDown, FileImage, GitFork, Home, Maximize, Rows3, Star, User } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Badge, FileImage, GitFork, Home, Maximize, Rows3, Star, User } from 'lucide-react';
 import { Checkbox } from '../ui/checkbox';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
-import { Separator } from '../ui/separator';
+import { cn } from '../../lib/utils';
+import { CanvasLayout, ContentSettings, ExportFormat, Resolution } from '../../types/editor';
 
 interface ControlPanelProps {
-  onControlChange: (key: string, value: boolean) => void;
-  onResolutionChange: (resolution: Resolution) => void;
-  onFormatChange?: (format: Format) => void;
-  onLayoutChange?: (layout: Layout) => void;
-  controlSettings: {
-    showForks: boolean;
-    showStars: boolean;
-    showHomepage: boolean;
-    showAuthorAvatar: boolean;
-    showAuthorName: boolean;
-  };
-  selectedResolution: Resolution;
-  selectedFormat?: Format;
-  selectedLayout?: Layout;
+  section: 'content' | 'canvas';
+  onControlChange: (key: keyof ContentSettings, value: boolean) => void;
+  controlSettings: ContentSettings;
+  onResolutionChange?: (resolution: Resolution) => void;
+  onFormatChange?: (format: ExportFormat) => void;
+  onLayoutChange?: (layout: CanvasLayout) => void;
+  selectedResolution?: Resolution;
+  selectedFormat?: ExportFormat;
+  selectedLayout?: CanvasLayout;
   supportsAuthorAvatar?: boolean;
 }
 
-type Resolution = 'x8' | 'x4' | 'x2';
-type Format = 'png' | 'jpeg';
-type Layout = 'default' | 'portrait';
+const contentItems: Array<{
+  key: keyof ContentSettings;
+  label: string;
+  description: string;
+  icon: React.ReactNode;
+}> = [
+  { key: 'showStars', label: 'Star 数', description: '显示仓库收藏数量', icon: <Star /> },
+  { key: 'showForks', label: 'Fork 数', description: '显示仓库分叉数量', icon: <GitFork /> },
+  { key: 'showHomepage', label: '主页链接', description: '显示项目主页或仓库地址', icon: <Home /> },
+  { key: 'showAuthorName', label: '作者名称', description: '显示仓库所有者名称', icon: <Badge /> },
+  { key: 'showAuthorAvatar', label: '作者头像', description: '仅部分模板支持', icon: <User /> },
+];
 
-const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResolutionChange, onFormatChange, onLayoutChange, controlSettings, selectedResolution, selectedFormat = 'png', selectedLayout = 'default', supportsAuthorAvatar = false }) => {
-  const controlItems: Array<{ key: keyof typeof controlSettings; label: string; icon: React.ReactNode }> = [
-    { key: 'showStars', label: 'Star 数', icon: <Star /> },
-    { key: 'showForks', label: 'Fork 数', icon: <GitFork /> },
-    { key: 'showHomepage', label: '主页链接', icon: <Home /> },
-    { key: 'showAuthorName', label: '作者名称', icon: <Badge /> },
-    ...(supportsAuthorAvatar ? [{ key: 'showAuthorAvatar' as const, label: '作者头像', icon: <User /> }] : [])
-  ];
+interface SegmentedControlProps<T extends string> {
+  label: string;
+  icon: React.ReactNode;
+  value: T;
+  options: Array<{ value: T; label: string }>;
+  onChange?: (value: T) => void;
+}
 
-  const resolutionItems = [
-    { key: 'x8', label: '超高清' },
-    { key: 'x4', label: '高清' },
-    { key: 'x2', label: '标清' },
-  ];
+const SegmentedControl = <T extends string>({ label, icon, value, options, onChange }: SegmentedControlProps<T>) => (
+  <fieldset className="setting-group">
+    <legend>
+      <span>{icon}</span>
+      {label}
+    </legend>
+    <div className="segmented-control">
+      {options.map((option) => (
+        <button
+          key={option.value}
+          type="button"
+          className={cn(value === option.value && 'is-selected')}
+          onClick={() => onChange?.(option.value)}
+          aria-pressed={value === option.value}
+        >
+          {option.label}
+        </button>
+      ))}
+    </div>
+  </fieldset>
+);
 
-  const formatItems = [
-    { key: 'png', label: 'PNG' },
-    { key: 'jpeg', label: 'JPEG' },
-  ];
-
-  const layoutItems = [
-    { key: 'default', label: '默认' },
-    { key: 'portrait', label: '竖屏' },
-  ];
-
-  const pickerClassName = 'w-full justify-between rounded-lg';
-
-  const renderPicker = <T extends string>(
-    label: string,
-    icon: React.ReactNode,
-    value: T,
-    options: Array<{ key: T; label: string }>,
-    onChange: (value: T) => void,
-  ) => (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button type="button" className={pickerClassName}>
-          <span className="flex items-center gap-2">
-            {icon}
-            {label}
-          </span>
-          <ChevronDown className="size-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="w-40">
-        <DropdownMenuRadioGroup value={value} onValueChange={(nextValue) => onChange(nextValue as T)}>
-          {options.map((item) => (
-            <DropdownMenuRadioItem key={item.key} value={item.key}>
-              {item.label}
-            </DropdownMenuRadioItem>
+const ControlPanel: React.FC<ControlPanelProps> = ({
+  section,
+  onControlChange,
+  controlSettings,
+  onResolutionChange,
+  onFormatChange,
+  onLayoutChange,
+  selectedResolution = 'x4',
+  selectedFormat = 'png',
+  selectedLayout = 'default',
+  supportsAuthorAvatar = false,
+}) => {
+  if (section === 'content') {
+    return (
+      <div className="content-settings">
+        {contentItems
+          .filter((item) => item.key !== 'showAuthorAvatar' || supportsAuthorAvatar)
+          .map((item) => (
+            <label key={item.key} className="setting-row">
+              <span className="setting-row__icon">{item.icon}</span>
+              <span className="setting-row__copy">
+                <strong>{item.label}</strong>
+                <span>{item.description}</span>
+              </span>
+              <Checkbox
+                checked={controlSettings[item.key]}
+                onCheckedChange={(checked) => onControlChange(item.key, checked === true)}
+                aria-label={item.label}
+              />
+            </label>
           ))}
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
+      </div>
+    );
+  }
 
   return (
-    <div className="flex h-full flex-col p-3">
-      <div className="px-2 pb-3 pt-1 text-xs font-extrabold text-neutral-500">控制栏</div>
-      <div className="space-y-2">
-        {renderPicker('分辨率', <Maximize className="size-4" />, selectedResolution, resolutionItems as Array<{ key: Resolution; label: string }>, onResolutionChange)}
-        {renderPicker('布局方向', <Rows3 className="size-4" />, selectedLayout, layoutItems as Array<{ key: Layout; label: string }>, (value) => onLayoutChange?.(value))}
-        {renderPicker('文件格式', <FileImage className="size-4" />, selectedFormat, formatItems as Array<{ key: Format; label: string }>, (value) => onFormatChange?.(value))}
-      </div>
-      <Separator className="my-3" />
-      <div className="space-y-2">
-        {controlItems.map((item) => (
-          <div
-            key={item.key}
-            role="button"
-            tabIndex={0}
-            className="flex h-10 w-full items-center gap-2 rounded-lg bg-neutral-950 px-3 text-left text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
-            onClick={() => onControlChange(item.key, !controlSettings[item.key])}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                onControlChange(item.key, !controlSettings[item.key]);
-              }
-            }}
-          >
-            <Checkbox checked={controlSettings[item.key]} className="border-white/25 data-[state=checked]:bg-blue-500" />
-            <span className="[&_svg]:size-4">{item.icon}</span>
-            <span>{item.label}</span>
-          </div>
-        ))}
-      </div>
+    <div className="canvas-settings">
+      <SegmentedControl
+        label="布局方向"
+        icon={<Rows3 />}
+        value={selectedLayout}
+        options={[
+          { value: 'default', label: '横屏' },
+          { value: 'portrait', label: '竖屏' },
+        ]}
+        onChange={onLayoutChange}
+      />
+      <SegmentedControl
+        label="导出倍率"
+        icon={<Maximize />}
+        value={selectedResolution}
+        options={[
+          { value: 'x2', label: '2x' },
+          { value: 'x4', label: '4x' },
+          { value: 'x8', label: '8x' },
+        ]}
+        onChange={onResolutionChange}
+      />
+      <SegmentedControl
+        label="文件格式"
+        icon={<FileImage />}
+        value={selectedFormat}
+        options={[
+          { value: 'png', label: 'PNG' },
+          { value: 'jpeg', label: 'JPEG' },
+        ]}
+        onChange={onFormatChange}
+      />
     </div>
   );
 };

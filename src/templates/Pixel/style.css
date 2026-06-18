@@ -157,6 +157,45 @@
   transition: color 0.3s ease;
 }
 
+.pixel:not(.portrait) .content {
+  padding: 24px 32px;
+}
+
+.pixel:not(.portrait) .repo-name {
+  margin-bottom: 12px;
+  font-size: 2.5rem;
+}
+
+.pixel:not(.portrait) .repo-description {
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.pixel:not(.portrait) .repo-stats {
+  margin: 12px 0;
+}
+
+.pixel:not(.portrait) .stat-item {
+  gap: 4px;
+}
+
+.pixel:not(.portrait) .stat-value {
+  font-size: 1.5rem;
+}
+
+.pixel:not(.portrait) .stat-label {
+  font-size: 0.8rem;
+}
+
+.pixel:not(.portrait) .language-tags,
+.pixel:not(.portrait) .homepage-section {
+  margin-top: 0;
+}
+
+.pixel:not(.portrait) .author-info {
+  margin: 8px 0 8px auto;
+}
+
 
 
 /* 竖屏样式 */
