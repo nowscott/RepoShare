@@ -13,10 +13,11 @@ export const InkTemplate: React.FC<InkTemplateProps> = ({
   showStars = true,
   showForks = true,
   showHomepage = true,
-  showAuthorName = true
+  showAuthorName = true,
+  layout = 'default'
 }) => {
   return (
-    <div className="ink-template">
+    <div className={`ink-template ${layout === 'portrait' ? 'portrait' : ''}`}>
       <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content-wrapper">
         <div className="header">

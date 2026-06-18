@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Layout, Typography, Button, notification } from 'antd';
-import { StepBackwardFilled, StepForwardFilled, DownloadOutlined } from '@ant-design/icons';
+import { notification } from 'antd';
+import { Download, PanelLeftClose, PanelLeftOpen, PanelRightClose, PanelRightOpen } from 'lucide-react';
 import Bowser from 'bowser';
 import RepoInput from '../Input';
+import { Button } from '../ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { downloadPreviewImage } from '../../utils/download';
-
-const { Header: AntHeader } = Layout;
-const { Title } = Typography;
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -17,9 +16,10 @@ interface HeaderProps {
   onRightSiderCollapse: () => void;
   selectedResolution: 'x8' | 'x4' | 'x2';
   selectedFormat: 'png' | 'jpeg';
+  repoName: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse, selectedResolution, selectedFormat }) => {
+const Header: React.FC<HeaderProps> = ({ onSubmit, leftSiderCollapsed, rightSiderCollapsed, onLeftSiderCollapse, onRightSiderCollapse, selectedResolution, selectedFormat, repoName }) => {
   const [isDownloading, setIsDownloading] = useState(false);
   const [notificationApi, contextHolder] = notification.useNotification();
 
@@ -80,7 +80,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
         'x4': 4,
         'x2': 2
       };
-      const success = await downloadPreviewImage({ scale: scaleMap[selectedResolution], format: selectedFormat });
+      const success = await downloadPreviewImage({ scale: scaleMap[selectedResolution], format: selectedFormat, repoName });
       if (success) {
         notificationApi.success({
           message: '保存成功',
@@ -99,101 +99,70 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onSubmit, leftSiderCollapse
     }
   };
   return (
-    <AntHeader
-      className="app-header"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 24px',
-        backgroundColor: isDarkMode ? '#141414' : '#fff',
-        boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.03)',
-        height: '64px',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1,
-        width: '100%',
-        borderBottom: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`
-      }}
-    >
+    <header className="sticky top-0 z-30 flex min-h-[76px] flex-wrap items-center gap-4 border-b border-black/10 bg-[#faf8f2]/85 px-5 py-3 backdrop-blur-xl">
       {contextHolder}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: '0 0 200px', justifyContent: 'flex-start' }}>        
-        <Button
-          type="default"
-          icon={leftSiderCollapsed ? (
-            <StepForwardFilled style={{ color: '#1C68DC' }} />
-          ) : (
-            <StepBackwardFilled style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />
-          )}
-          onClick={onLeftSiderCollapse}
-          style={{
-            padding: 0,
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        />
-        <Title
-          level={4}
-          style={{
-            margin: 0,
-            color: isDarkMode ? '#ffffff' : '#000000',
-            fontSize: '18px',
-            lineHeight: '64px'
-          }}
+      <TooltipProvider delayDuration={200}>
+      <div className="flex min-w-0 flex-1 basis-52 items-center gap-3">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={onLeftSiderCollapse}
+              aria-label={leftSiderCollapsed ? '展开模板栏' : '折叠模板栏'}
+            >
+              {leftSiderCollapsed ? <PanelLeftOpen /> : <PanelLeftClose />}
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>{leftSiderCollapsed ? '展开模板栏' : '折叠模板栏'}</TooltipContent>
+        </Tooltip>
+        <a
+          className="inline-flex items-center gap-3 text-neutral-950 no-underline"
+          href="https://github.com/nowscott/RepoShare"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <a
-            href="https://github.com/nowscott/RepoShare"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: 'inherit',
-              textDecoration: 'none',
-              transition: 'opacity 0.2s',
-            }}
-          >
-            RepoShare
-          </a>
-        </Title>
+          <span className="grid size-9 place-items-center rounded-lg border border-black/10 bg-white font-extrabold text-blue-600 shadow-[0_8px_24px_rgba(20,18,14,0.08)]">R</span>
+          <span className="text-lg font-extrabold">RepoShare</span>
+        </a>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1 1 auto' }}>
+      <div className="order-3 flex min-w-0 flex-[2_1_360px] justify-center md:order-none">
         <RepoInput onSubmit={onSubmit} />
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: '0 0 200px', justifyContent: 'flex-end' }}>
-        <Button
-          type="default"
-          icon={<DownloadOutlined style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />}
-          onClick={handleDownload}
-          disabled={isDownloading}
-          style={{
-            padding: 0,
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        />
-        <Button
-          type="default"
-          icon={rightSiderCollapsed ? (
-            <StepBackwardFilled style={{ color: '#1C68DC' }} />
-          ) : (
-            <StepForwardFilled style={{ color: isDarkMode ? '#ffffff' : '#000000' }} />
-          )}
-          onClick={onRightSiderCollapse}
-          style={{
-            padding: 0,
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        />
+      <div className="flex min-w-0 flex-1 basis-28 items-center justify-end gap-3">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={handleDownload}
+              disabled={isDownloading}
+              aria-label="下载预览图"
+            >
+              <Download />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>下载预览图</TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={onRightSiderCollapse}
+              aria-label={rightSiderCollapsed ? '展开控制栏' : '折叠控制栏'}
+            >
+              {rightSiderCollapsed ? <PanelRightOpen /> : <PanelRightClose />}
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>{rightSiderCollapsed ? '展开控制栏' : '折叠控制栏'}</TooltipContent>
+        </Tooltip>
       </div>
-    </AntHeader>
+      </TooltipProvider>
+    </header>
   );
 };
 

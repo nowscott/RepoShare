@@ -126,3 +126,47 @@
   display: inline-block;
   font-weight: 500;
 }
+
+.ink-template.portrait {
+  width: 540px;
+  height: 720px;
+  min-height: 720px;
+  padding: 32px;
+}
+
+.ink-template.portrait .content-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 36px;
+  justify-content: space-between;
+}
+
+.ink-template.portrait .header {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ink-template.portrait .repo-name {
+  font-size: 3.4rem;
+  line-height: 1.1;
+}
+
+.ink-template.portrait .repo-homepage {
+  word-break: break-all;
+}
+
+.ink-template.portrait .repo-description {
+  flex-grow: 0;
+  font-size: 1.18rem;
+}
+
+.ink-template.portrait .repo-stats {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.ink-template.portrait .stats-group {
+  gap: 24px;
+}

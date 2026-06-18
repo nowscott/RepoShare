@@ -7,13 +7,15 @@ import CardTemplate from '../templates/Card';
 import ModernTemplate from '../templates/Modern';
 import ElegantTemplate from '../templates/Elegant';
 import LuxuryTemplate from '../templates/Luxury';
+import { TemplateProps } from '../types/templates';
 
 export interface TemplateConfig {
   id: string;
   name: string;
   icon: React.ReactNode;
   description: string;
-  component: React.ComponentType<any>;
+  component: React.ComponentType<TemplateProps>;
+  supportsAuthorAvatar?: boolean;
 }
 
 const templates: TemplateConfig[] = [
@@ -23,7 +25,8 @@ const templates: TemplateConfig[] = [
     name: 'Card',
     icon: <CreditCardOutlined />,
     description: '简洁的卡片式布局，突出展示仓库的核心信息',
-    component: CardTemplate
+    component: CardTemplate,
+    supportsAuthorAvatar: true
   },
   {
     id: 'luxury',
@@ -37,7 +40,8 @@ const templates: TemplateConfig[] = [
     name: 'Pixel',
     icon: <BuildFilled/>,
     description: '像素风格设计，为代码仓库增添复古感',
-    component: PixelTemplate
+    component: PixelTemplate,
+    supportsAuthorAvatar: true
   },
   {
     id: 'basic',

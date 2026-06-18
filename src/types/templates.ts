@@ -20,6 +20,8 @@ export interface AvatarTemplateProps extends BaseTemplateProps {
   showAuthorAvatar?: boolean;
 }
 
+export type TemplateProps = AvatarTemplateProps;
+
 // 导出具体模板的类型定义
 export type BasicTemplateProps = BaseTemplateProps;
 export type InkTemplateProps = BaseTemplateProps;

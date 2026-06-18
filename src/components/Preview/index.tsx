@@ -1,10 +1,9 @@
 import React from 'react';
 import templates from '../../config/templates';
+import { TemplateProps } from '../../types/templates';
 
-interface PreviewProps {
+interface PreviewProps extends TemplateProps {
   selectedTemplate: string;
-  layout?: 'default' | 'portrait';
-  [key: string]: any;
 }
 
 const Preview: React.FC<PreviewProps> = (props) => {

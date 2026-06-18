@@ -1,6 +1,15 @@
 import React from 'react';
-import { Menu, Checkbox } from 'antd';
-import { StarOutlined, ForkOutlined, HomeOutlined, UserOutlined, IdcardOutlined, ExpandOutlined, FileImageOutlined, ColumnHeightOutlined } from '@ant-design/icons';
+import { Badge, ChevronDown, FileImage, GitFork, Home, Maximize, Rows3, Star, User } from 'lucide-react';
+import { Button } from '../ui/button';
+import { Checkbox } from '../ui/checkbox';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+import { Separator } from '../ui/separator';
 
 interface ControlPanelProps {
   onControlChange: (key: string, value: boolean) => void;
@@ -17,19 +26,20 @@ interface ControlPanelProps {
   selectedResolution: Resolution;
   selectedFormat?: Format;
   selectedLayout?: Layout;
+  supportsAuthorAvatar?: boolean;
 }
 
 type Resolution = 'x8' | 'x4' | 'x2';
 type Format = 'png' | 'jpeg';
 type Layout = 'default' | 'portrait';
 
-const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResolutionChange, onFormatChange, onLayoutChange, controlSettings, selectedResolution, selectedFormat = 'png', selectedLayout = 'default' }) => {
-  const controlItems = [
-    { key: 'showStars', label: 'Star 数', icon: <StarOutlined /> },
-    { key: 'showForks', label: 'Fork 数', icon: <ForkOutlined /> },
-    { key: 'showHomepage', label: '主页链接', icon: <HomeOutlined /> },
-    { key: 'showAuthorName', label: '作者名称', icon: <IdcardOutlined /> },
-    { key: 'showAuthorAvatar', label: '作者头像', icon: <UserOutlined /> }
+const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResolutionChange, onFormatChange, onLayoutChange, controlSettings, selectedResolution, selectedFormat = 'png', selectedLayout = 'default', supportsAuthorAvatar = false }) => {
+  const controlItems: Array<{ key: keyof typeof controlSettings; label: string; icon: React.ReactNode }> = [
+    { key: 'showStars', label: 'Star 数', icon: <Star /> },
+    { key: 'showForks', label: 'Fork 数', icon: <GitFork /> },
+    { key: 'showHomepage', label: '主页链接', icon: <Home /> },
+    { key: 'showAuthorName', label: '作者名称', icon: <Badge /> },
+    ...(supportsAuthorAvatar ? [{ key: 'showAuthorAvatar' as const, label: '作者头像', icon: <User /> }] : [])
   ];
 
   const resolutionItems = [
@@ -48,86 +58,68 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onControlChange, onResoluti
     { key: 'portrait', label: '竖屏' },
   ];
 
-  const items = [
-    {
-      key: 'controls',
-      label: '控制栏',
-      type: 'group' as const,
-      children: [
-        {
-          key: 'resolution',
-          label: '分辨率',
-          icon: <ExpandOutlined />,
-          children: resolutionItems.map((item) => ({
-            key: item.key,
-            label: item.label,
-            onClick: () => onResolutionChange(item.key as Resolution)
-          }))
-        },
-        {
-          key: 'layout',
-          label: '布局方向',
-          icon: <ColumnHeightOutlined />,
-          children: layoutItems.map((item) => ({
-            key: item.key,
-            label: item.label,
-            onClick: () => onLayoutChange?.(item.key as Layout)
-          }))
-        },
-        {
-          key: 'format',
-          label: '文件格式',
-          icon: <FileImageOutlined />,
-          children: formatItems.map((item) => ({
-            key: item.key,
-            label: item.label,
-            onClick: () => onFormatChange?.(item.key as Format)
-          }))
-        },
-        {
-          type: 'divider' as const
-        },
-        ...controlItems.map((item) => ({
-          key: item.key,
-          onClick: () => onControlChange(item.key, !controlSettings[item.key as keyof typeof controlSettings]),
-          label: (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Checkbox checked={controlSettings[item.key as keyof typeof controlSettings]} />
-                {item.icon}
-                {item.label}
-              </div>
-            </div>
-          )
-        }))
-      ]
-    }
-  ];
+  const pickerClassName = 'w-full justify-between rounded-lg';
 
-  const selectedKeys = [
-    ...Object.entries(controlSettings)
-      .filter(([_, value]) => value)
-      .map(([key]) => key)
-  ];
-
-  if (selectedResolution) {
-    selectedKeys.push(selectedResolution);
-  }
-
-  if (selectedFormat) {
-    selectedKeys.push(selectedFormat);
-  }
-
-  if (selectedLayout) {
-    selectedKeys.push(selectedLayout);
-  }
+  const renderPicker = <T extends string>(
+    label: string,
+    icon: React.ReactNode,
+    value: T,
+    options: Array<{ key: T; label: string }>,
+    onChange: (value: T) => void,
+  ) => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button type="button" className={pickerClassName}>
+          <span className="flex items-center gap-2">
+            {icon}
+            {label}
+          </span>
+          <ChevronDown className="size-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="w-40">
+        <DropdownMenuRadioGroup value={value} onValueChange={(nextValue) => onChange(nextValue as T)}>
+          {options.map((item) => (
+            <DropdownMenuRadioItem key={item.key} value={item.key}>
+              {item.label}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 
   return (
-    <Menu
-      mode="inline"
-      selectedKeys={selectedKeys}
-      items={items}
-    />
+    <div className="flex h-full flex-col p-3">
+      <div className="px-2 pb-3 pt-1 text-xs font-extrabold text-neutral-500">控制栏</div>
+      <div className="space-y-2">
+        {renderPicker('分辨率', <Maximize className="size-4" />, selectedResolution, resolutionItems as Array<{ key: Resolution; label: string }>, onResolutionChange)}
+        {renderPicker('布局方向', <Rows3 className="size-4" />, selectedLayout, layoutItems as Array<{ key: Layout; label: string }>, (value) => onLayoutChange?.(value))}
+        {renderPicker('文件格式', <FileImage className="size-4" />, selectedFormat, formatItems as Array<{ key: Format; label: string }>, (value) => onFormatChange?.(value))}
+      </div>
+      <Separator className="my-3" />
+      <div className="space-y-2">
+        {controlItems.map((item) => (
+          <div
+            key={item.key}
+            role="button"
+            tabIndex={0}
+            className="flex h-10 w-full items-center gap-2 rounded-lg bg-neutral-950 px-3 text-left text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
+            onClick={() => onControlChange(item.key, !controlSettings[item.key])}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                onControlChange(item.key, !controlSettings[item.key]);
+              }
+            }}
+          >
+            <Checkbox checked={controlSettings[item.key]} className="border-white/25 data-[state=checked]:bg-blue-500" />
+            <span className="[&_svg]:size-4">{item.icon}</span>
+            <span>{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

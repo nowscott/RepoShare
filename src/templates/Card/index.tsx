@@ -15,10 +15,11 @@ export const CardTemplate: React.FC<CardTemplateProps> = ({
   showForks = true,
   showHomepage = true,
   showAuthorAvatar = true,
-  showAuthorName = true
+  showAuthorName = true,
+  layout = 'default'
 }) => {
   return (
-    <div className="card-template">
+    <div className={`card-template ${layout === 'portrait' ? 'portrait' : ''}`}>
       <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="card">
         <div className="card-header">

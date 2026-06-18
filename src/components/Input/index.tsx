@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Input, Space, Button } from 'antd';
-import { RedoOutlined } from '@ant-design/icons';
+import { RotateCw } from 'lucide-react';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 
 interface InputProps {
   onSubmit: (url: string) => void;
@@ -17,21 +18,25 @@ const RepoInput: React.FC<InputProps> = ({ onSubmit }) => {
   };
 
   return (
-    <Space.Compact style={{ minWidth: '260px', maxWidth: '420px', width: 'auto', borderRadius: '24px'}}>
+    <div className="flex w-full max-w-[520px] items-center rounded-full border border-black/10 bg-white p-1 shadow-[0_14px_40px_rgba(25,23,18,0.08)]">
       <Input
         placeholder="username/repo"
         value={repoUrl}
-        onChange={(e) => setRepoUrl(e.target.value)}
-        style={{ borderRadius: '24px 0 0 24px', fontWeight: 'bold', flex: '1 1 auto' }}
-        onPressEnter={handleSubmit}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setRepoUrl(event.target.value)}
+        className="h-10 flex-1 rounded-full border-0 bg-transparent shadow-none focus-visible:ring-0"
+        onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
+          if (event.key === 'Enter') handleSubmit();
+        }}
       />
       <Button 
-        type="primary" 
         onClick={handleSubmit} 
-        icon={<RedoOutlined />}
-        style={{ borderRadius: '0 24px 24px 0', flex: '0 0 auto' }}
-      />
-    </Space.Compact>
+        size="icon"
+        className="rounded-full"
+        aria-label="获取仓库信息"
+      >
+        <RotateCw className="size-4" />
+      </Button>
+    </div>
   );
 };
 

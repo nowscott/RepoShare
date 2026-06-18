@@ -14,10 +14,11 @@ export const LuxuryTemplate: React.FC<LuxuryTemplateProps> = ({
   showStars = true,
   showForks = true,
   showHomepage = true,
-  showAuthorName = true
+  showAuthorName = true,
+  layout = 'default'
 }) => {
   return (
-    <div className="luxury-template">
+    <div className={`luxury-template ${layout === 'portrait' ? 'portrait' : ''}`}>
       <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content-wrapper">
         <div className="header">

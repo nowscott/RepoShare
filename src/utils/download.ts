@@ -5,13 +5,14 @@ interface DownloadOptions {
   scale?: number;
   quality?: number;
   format?: 'png' | 'jpeg';
+  repoName?: string;
 }
 
 export const downloadPreviewImage = async (options: DownloadOptions = {}) => {
-  const previewElement = document.querySelector('.app-content > div') as HTMLElement;
+  const previewElement = document.querySelector('[data-preview-root="true"]') as HTMLElement | null;
   if (!previewElement) return;
 
-  const { scale = 8, quality = 1, format = 'png' } = options;
+  const { scale = 8, quality = 1, format = 'png', repoName = 'repo' } = options;
 
   try {
     const config = {
@@ -34,9 +35,9 @@ export const downloadPreviewImage = async (options: DownloadOptions = {}) => {
     }
 
     const link = document.createElement('a');
-    const repoName = document.querySelector('.app-content')?.querySelector('h1')?.textContent || 'repo';
     const timeCode = String(dayjs().unix()).slice(-6);
-    link.download = `${repoName}_${timeCode}.${format}`;
+    const safeRepoName = repoName.replace(/[^\w.-]+/g, '_') || 'repo';
+    link.download = `${safeRepoName}_${timeCode}.${format}`;
     link.href = dataUrl;
     link.click();
     return true;
