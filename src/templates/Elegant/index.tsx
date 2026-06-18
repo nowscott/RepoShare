@@ -13,10 +13,11 @@ export const ElegantTemplate: React.FC<ElegantTemplateProps> = ({
   showStars = true,
   showForks = true,
   showHomepage = true,
-  showAuthorName = true
+  showAuthorName = true,
+  layout = 'default'
 }) => {
   return (
-    <div className="elegant-template">
+    <div className={`elegant-template ${layout === 'portrait' ? 'portrait' : ''}`}>
       <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content-container">
         <div className="main-content">

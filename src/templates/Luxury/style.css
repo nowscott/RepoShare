@@ -137,3 +137,48 @@
   font-size: 1rem;
   font-weight: 500;
 }
+
+.luxury-template.portrait {
+  width: 540px;
+  height: 720px;
+  min-height: 720px;
+  padding: 32px;
+}
+
+.luxury-template.portrait .content-wrapper {
+  height: 100%;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.luxury-template.portrait .header {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.luxury-template.portrait .repo-name {
+  font-size: 3.4rem;
+  line-height: 1.1;
+}
+
+.luxury-template.portrait .repo-description {
+  font-size: 1.15rem;
+}
+
+.luxury-template.portrait .repo-stats {
+  gap: 28px;
+  padding: 28px 0;
+}
+
+.luxury-template.portrait .footer-content {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: auto;
+}
+
+.luxury-template.portrait .author-info {
+  justify-content: flex-start;
+}

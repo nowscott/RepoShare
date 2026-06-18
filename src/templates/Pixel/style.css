@@ -59,12 +59,12 @@
   margin: 20px 0;
 }
 
-.stat-items {
+.pixel .stat-items {
   display: flex;
   gap: 2.2rem;
 }
 
-.stat-item {
+.pixel .stat-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -160,12 +160,14 @@
 
 
 /* 竖屏样式 */
-.portrait {
+.pixel.portrait {
   width: 540px;
   height: 720px;
+  min-height: 720px;
+  padding: 32px;
 }
 
-.portrait .content {
+.pixel.portrait .content {
   width: 100%;
   height: 100%;
   display: flex;
@@ -173,24 +175,32 @@
   justify-content: space-between;
 }
 
-.portrait .repo-stats {
+.pixel.portrait .repo-name {
+  font-size: 3.4rem;
+}
+
+.pixel.portrait .repo-description {
+  font-size: 1.18rem;
+}
+
+.pixel.portrait .repo-stats {
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
 }
 
-.portrait .stat-items {
+.pixel.portrait .stat-items {
   width: 100%;
   justify-content: flex-start;
   gap: 24px;
 }
 
-.portrait .language-tags {
+.pixel.portrait .language-tags {
   width: 100%;
   justify-content: flex-start;
 }
 
-.portrait .footer {
+.pixel.portrait .footer {
   margin-top: 0;
   width: 100%;
   justify-content: space-between;

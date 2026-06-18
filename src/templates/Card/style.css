@@ -205,3 +205,53 @@
   color: var(--card-text-color);
   font-size: 1rem;
 }
+
+.card-template.portrait {
+  width: 540px;
+  height: 720px;
+  min-height: 720px;
+  padding: 32px;
+}
+
+.card-template.portrait .card {
+  height: 100%;
+  min-height: 0;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-template.portrait .title-row {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.card-template.portrait .repo-name {
+  min-width: 0;
+  font-size: 3.4rem;
+  line-height: 1.1;
+}
+
+.card-template.portrait .repo-description {
+  max-width: 100%;
+  font-size: 1.18rem;
+}
+
+.card-template.portrait .card-body {
+  margin-top: auto;
+}
+
+.card-template.portrait .repo-stats {
+  gap: 24px;
+}
+
+.card-template.portrait .card-footer {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.card-template.portrait .homepage-link {
+  word-break: break-all;
+}

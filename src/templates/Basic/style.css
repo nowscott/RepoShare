@@ -133,7 +133,7 @@
 
 
 /* 竖屏样式 */
-.portrait {
+.basic.portrait {
   background-color: #f0f4f8;
   position: relative;
   width: 100%;
@@ -146,7 +146,7 @@
   font-family: 'Sofia Pro', sans-serif;
 }
 
-.portrait .content-wrapper {
+.basic.portrait .content-wrapper {
   width: 100%;
   height: 100%;
   display: flex;
@@ -155,29 +155,29 @@
   gap: 1.2rem;
 }
 
-.portrait .header {
+.basic.portrait .header {
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
 }
 
-.portrait .repo-name {
+.basic.portrait .repo-name {
   font-size: 3.6rem;
 }
 
-.portrait .repo-stats {
+.basic.portrait .repo-stats {
   gap: 20px;
   margin-top: auto;
 }
 
-.portrait .stats-group {
+.basic.portrait .stats-group {
   justify-content: flex-start;
 }
 
-.portrait .stat-value{
+.basic.portrait .stat-value{
   font-size: 1.2rem;
 }
 
-.portrait .language-tags {
+.basic.portrait .language-tags {
   justify-content: flex-start;
 }

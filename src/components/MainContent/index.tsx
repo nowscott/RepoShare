@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Layout } from 'antd';
 import Sidebar from '../Sidebar';
 import Preview from '../Preview';
 import ControlPanel from '../ControlPanel';
-
-const { Content, Sider } = Layout;
+import templates from '../../config/templates';
+import { RepoData } from '../../utils/github';
 
 interface MainContentProps {
   selectedTemplate: string;
@@ -16,22 +15,12 @@ interface MainContentProps {
   onRightSiderCollapse: () => void;
   onResolutionChange?: (resolution: 'x8' | 'x4' | 'x2') => void;
   onFormatChange?: (format: 'png' | 'jpeg') => void;
-  repoData: {
-    repoName: string;
-    repoDescription: string;
-    repoStars: number;
-    repoForks: number;
-    repoLanguages: string[];
-    authorName?: string;
-    authorAvatar?: string;
-    homepage?: string;
-  };
+  repoData: RepoData;
 }
 
 const MainContent: React.FC<MainContentProps> = ({
   selectedTemplate,
   onTemplateSelect,
-  isDarkMode,
   leftSiderCollapsed = false,
   rightSiderCollapsed = false,
   onResolutionChange,
@@ -49,10 +38,6 @@ const MainContent: React.FC<MainContentProps> = ({
   const [selectedResolution, setSelectedResolution] = useState<'x8' | 'x4' | 'x2'>('x4');
   const [selectedFormat, setSelectedFormat] = useState<'png' | 'jpeg'>('png');
   const [selectedLayout, setSelectedLayout] = useState<'default' | 'portrait'>('default');
-
-  React.useEffect(() => {
-    onResolutionChange?.('x4');
-  }, []);
 
   const handleControlChange = (key: string, value: boolean) => {
     setControlSettings(prev => ({
@@ -75,50 +60,45 @@ const MainContent: React.FC<MainContentProps> = ({
     setSelectedLayout(layout);
   };
 
+  const selectedTemplateConfig = templates.find((template) => template.id === selectedTemplate);
+
   return (
-    <Layout hasSider>
-      <Sider
-        width={160}
-        className="app-sider"
-        theme={isDarkMode ? 'dark' : 'light'}
-        collapsed={leftSiderCollapsed}
-        collapsedWidth={0}
-        style={{ position: 'fixed', left: 0, height: '90vh', top: '64px', zIndex: 20, borderRight: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`, overflow: 'hidden' }}
-      >
-        <Sidebar
-          selectedTemplate={selectedTemplate}
-          onTemplateSelect={onTemplateSelect}
-        />
-      </Sider>
-      <Content className="app-content" style={{ padding: '24px', minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: isDarkMode ? '#141414' : '#fff', borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`, borderRight: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}`,  overflow: 'auto' }}>
-        <div style={{ 
+    <div className="flex min-h-[calc(100vh-76px)] bg-transparent max-md:flex-col">
+      {!leftSiderCollapsed && (
+        <aside className="m-[18px] w-[184px] shrink-0 overflow-hidden rounded-lg border border-black/10 bg-white/85 shadow-[0_18px_50px_rgba(25,23,18,0.08)] backdrop-blur-md max-md:m-3 max-md:w-auto">
+          <Sidebar
+            selectedTemplate={selectedTemplate}
+            onTemplateSelect={onTemplateSelect}
+          />
+        </aside>
+      )}
+      <main className="canvas-grid flex min-w-0 flex-1 items-center justify-center overflow-auto p-6 max-md:min-h-[640px] max-md:items-start max-md:justify-start max-md:p-3">
+        <div className="box-content shrink-0 rounded-lg border border-black/10 bg-white/65 p-3.5 shadow-[0_24px_80px_rgba(25,23,18,0.12)]" style={{
           width: selectedLayout === 'portrait' ? '540px' : '750px', 
           height: selectedLayout === 'portrait' ? '720px' : 'auto',
-          flex: 'none' 
+          boxSizing: 'content-box',
         }}>
-          <Preview selectedTemplate={selectedTemplate} layout={selectedLayout} {...repoData} {...controlSettings} />
+          <div className="size-full overflow-hidden rounded-lg bg-white" data-preview-root="true">
+            <Preview selectedTemplate={selectedTemplate} layout={selectedLayout} {...repoData} {...controlSettings} />
+          </div>
         </div>
-      </Content>
-      <Sider
-        width={160}
-        className="app-sider"
-        theme={isDarkMode ? 'dark' : 'light'}
-        collapsed={rightSiderCollapsed}
-        collapsedWidth={0}
-        style={{ position: 'fixed', right: 0, height: '90vh', top: '64px', zIndex: 20, borderLeft: `1px solid ${isDarkMode ? '#303030' : '#f0f0f0'}` }}
-      >
-        <ControlPanel
-          controlSettings={controlSettings}
-          onControlChange={handleControlChange}
-          onResolutionChange={handleResolutionChange}
-          onFormatChange={handleFormatChange}
-          onLayoutChange={handleLayoutChange}
-          selectedResolution={selectedResolution}
-          selectedFormat={selectedFormat}
-          selectedLayout={selectedLayout}
-        />
-      </Sider>
-    </Layout>
+      </main>
+      {!rightSiderCollapsed && (
+        <aside className="m-[18px] w-[184px] shrink-0 overflow-hidden rounded-lg border border-black/10 bg-white/85 shadow-[0_18px_50px_rgba(25,23,18,0.08)] backdrop-blur-md max-md:m-3 max-md:w-auto">
+          <ControlPanel
+            controlSettings={controlSettings}
+            onControlChange={handleControlChange}
+            onResolutionChange={handleResolutionChange}
+            onFormatChange={handleFormatChange}
+            onLayoutChange={handleLayoutChange}
+            selectedResolution={selectedResolution}
+            selectedFormat={selectedFormat}
+            selectedLayout={selectedLayout}
+            supportsAuthorAvatar={Boolean(selectedTemplateConfig?.supportsAuthorAvatar)}
+          />
+        </aside>
+      )}
+    </div>
   );
 };
 

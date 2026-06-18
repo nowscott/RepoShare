@@ -13,10 +13,11 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({
   showStars = true,
   showForks = true,
   showHomepage = true,
-  showAuthorName = true
+  showAuthorName = true,
+  layout = 'default'
 }) => {
   return (
-    <div className="modern-template">
+    <div className={`modern-template ${layout === 'portrait' ? 'portrait' : ''}`}>
       <div className="watermark">Designed by RepoShare © NowScott</div>
       <div className="content-wrapper">
         <div className="header">
