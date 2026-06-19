@@ -1,0 +1,86 @@
+/*
+ * Export-template typography guardrails.
+ * Every template keeps its own visual language; these rules only prevent
+ * late-loading web fonts and unusually long repository data from overlapping.
+ */
+
+[data-preview-root="true"] > * {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+[data-preview-root="true"] .repo-name {
+  max-width: 100%;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+[data-preview-root="true"] .repo-description {
+  display: -webkit-box;
+  max-width: 100%;
+  overflow: hidden;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+[data-preview-root="true"] .stat-value {
+  line-height: 1.15;
+}
+
+[data-preview-root="true"] .stat-icon {
+  line-height: 1.2;
+}
+
+[data-preview-root="true"] .header,
+[data-preview-root="true"] .title-row {
+  min-width: 0;
+}
+
+[data-preview-root="true"] .repo-homepage,
+[data-preview-root="true"] .homepage-link {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  text-overflow: ellipsis;
+}
+
+[data-preview-root="true"] .language-tags,
+[data-preview-root="true"] .languages-section,
+[data-preview-root="true"] .languages-wrapper {
+  min-width: 0;
+}
+
+[data-preview-root="true"] .language-tag {
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+[data-preview-root="true"] .author-info,
+[data-preview-root="true"] .footer,
+[data-preview-root="true"] .footer-content,
+[data-preview-root="true"] .card-footer {
+  min-width: 0;
+}
+
+[data-preview-root="true"] .author-name,
+[data-preview-root="true"] .author-prefix,
+[data-preview-root="true"] .author-label {
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+[data-preview-root="true"] .portrait .repo-description {
+  -webkit-line-clamp: 6;
+}
+
+[data-preview-root="true"] .portrait .repo-name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}

@@ -2,6 +2,19 @@
 
 RepoShare 的重要版本变化记录在此。版本号遵循 Semantic Versioning。
 
+## [1.0.2] - 2026-06-19
+
+### Changed
+
+- 模板字体统一迁移至 NowFont 字体服务，并使用按字符切分的 WOFF2 资源加载。
+- 为各模板补充可靠的中文字体回退栈，保留原有视觉风格。
+
+### Fixed
+
+- 修复原字体 CDN 返回 403 导致模板字体加载失败的问题。
+- 修复字体加载完成后仓库标题、描述、统计图标及作者信息发生遮挡或裁切的问题。
+- 修复长仓库名、长描述和主页地址在横竖画布中的溢出问题。
+
 ## [1.0.1] - 2026-06-19
 
 ### Changed
@@ -61,5 +74,6 @@ RepoShare 的重要版本变化记录在此。版本号遵循 Semantic Versionin
 
 - 删除基于 main 分支 push 的自动 Release workflow，发布改为显式手动执行。
 
+[1.0.2]: https://github.com/nowscott/RepoShare/releases/tag/v1.0.2
 [1.0.1]: https://github.com/nowscott/RepoShare/releases/tag/v1.0.1
 [1.0.0]: https://github.com/nowscott/RepoShare/releases/tag/v1.0.0

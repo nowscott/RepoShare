@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family:'MuzaiPixel';
+  font-family: 'MuzaiPixel', 'Smiley Sans Oblique', '得意黑', monospace;
   font-weight:'400';
   position: relative;
 }

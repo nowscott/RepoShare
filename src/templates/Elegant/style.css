@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family:'KingHwa_OldSong';
+  font-family: 'KingHwa_OldSong', 'Huiwen-mincho', '汇文明朝体', serif;
   font-weight:'400';
   position: relative;
 }
