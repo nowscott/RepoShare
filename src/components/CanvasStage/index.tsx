@@ -35,13 +35,16 @@ const CanvasStage: React.FC<CanvasStageProps> = ({ selectedTemplate, layout, ...
   }, [framedHeight, framedWidth]);
 
   return (
-    <main className="canvas-stage" ref={viewportRef}>
+    <main
+      className="canvas-stage-atmosphere relative isolate flex h-full w-full min-w-0 items-center justify-center overflow-hidden px-[var(--rs-canvas-padding-regular)] pt-[104px] pb-[116px] min-[1400px]:px-[var(--rs-canvas-padding-wide)] max-md:px-3 max-md:pt-[88px] max-md:pb-[calc(var(--rs-dock-height-compact)+48px+env(safe-area-inset-bottom))]"
+      ref={viewportRef}
+    >
       <div
-        className="canvas-stage__scaled-frame"
+        className="relative shrink-0"
         style={{ width: framedWidth * scale, height: framedHeight * scale }}
       >
         <div
-          className="canvas-stage__frame"
+          className="absolute top-0 left-0 [transform-origin:top_left]"
           style={{
             width: framedWidth,
             height: framedHeight,
@@ -49,7 +52,7 @@ const CanvasStage: React.FC<CanvasStageProps> = ({ selectedTemplate, layout, ...
           }}
         >
           <div
-            className="canvas-stage__preview"
+            className="absolute top-3 left-3 overflow-hidden rounded-[26px] bg-white shadow-[var(--rs-shadow-preview)] [clip-path:inset(0_round_26px)] [transform:translateZ(0)]"
             data-preview-root="true"
             style={{ width: canvas.width, height: canvas.height }}
           >

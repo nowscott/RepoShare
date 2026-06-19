@@ -153,7 +153,7 @@ function App() {
       theme={{
         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: {
-          borderRadius: 8,
+          borderRadius: 14,
           colorPrimary: isDarkMode ? '#6f8cff' : '#4169e1',
         },
       }}
@@ -165,9 +165,7 @@ function App() {
             isDarkMode={isDarkMode}
             onThemeToggle={handleThemeToggle}
             onSubmit={handleRepoSubmit}
-            onDownload={handleDownload}
             isLoadingRepo={isLoadingRepo}
-            isDownloading={isDownloading}
           />
           <MainContent
             selectedTemplate={selectedTemplate}

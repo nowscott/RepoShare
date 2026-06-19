@@ -2,6 +2,23 @@
 
 RepoShare 的重要版本变化记录在此。版本号遵循 Semantic Versioning。
 
+## [1.0.1] - 2026-06-19
+
+### Changed
+
+- 将编辑器重构为顶部命令岛、中央预览舞台与底部统一 Dock。
+- 使用 Liquid Glass 材质、大圆角胶囊按钮和统一图标语言重做应用壳层。
+- 使用 Tailwind utilities 维护主要布局、响应式尺寸和控件状态。
+- 新增 RepoShare 专属 SVG 品牌标识与 favicon。
+- 应用壳层统一使用得意黑字体。
+- 弹出设置面板改为磨砂高可读背景，并优化展开动画和焦点返回。
+
+### Fixed
+
+- 修复深浅主题下玻璃轮廓、圆角和预览裁切不一致的问题。
+- 修复移动端工具结构重复、面板遮挡和横向溢出问题。
+- 修复设置面板标题贴近边缘以及 Dock 下载按钮右侧留白不均的问题。
+
 ## [1.0.0] - 2026-06-19
 
 ### Added
@@ -44,4 +61,5 @@ RepoShare 的重要版本变化记录在此。版本号遵循 Semantic Versionin
 
 - 删除基于 main 分支 push 的自动 Release workflow，发布改为显式手动执行。
 
+[1.0.1]: https://github.com/nowscott/RepoShare/releases/tag/v1.0.1
 [1.0.0]: https://github.com/nowscott/RepoShare/releases/tag/v1.0.0

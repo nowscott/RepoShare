@@ -19,7 +19,7 @@
   --rs-space-1000: 80px;
 
   /* Typography. */
-  --rs-font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+  --rs-font-sans: "Smiley Sans Oblique", "得意黑", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
   --rs-font-size-caption: 12px;
   --rs-line-height-caption: 16px;
   --rs-font-size-body: 14px;
@@ -35,11 +35,12 @@
   --rs-letter-spacing: 0;
 
   /* Shape, border and control dimensions. */
-  --rs-radius-small: 4px;
-  --rs-radius-medium: 6px;
-  --rs-radius-large: 8px;
-  --rs-radius-glass: 16px;
-  --rs-radius-glass-compact: 20px;
+  --rs-radius-small: 8px;
+  --rs-radius-medium: 12px;
+  --rs-radius-large: 18px;
+  --rs-radius-glass: 36px;
+  --rs-radius-glass-compact: 32px;
+  --rs-radius-glass-inner: 24px;
   --rs-border-width: 1px;
   --rs-focus-width: 2px;
   --rs-control-height: 36px;
@@ -51,9 +52,11 @@
   /* Layout dimensions. */
   --rs-command-bar-height: 64px;
   --rs-command-bar-height-compact: 56px;
-  --rs-tool-rail-width: 56px;
-  --rs-inspector-width: 288px;
-  --rs-mobile-toolbar-height: 64px;
+  --rs-command-bar-width: 760px;
+  --rs-inspector-width: 320px;
+  --rs-template-inspector-width: 360px;
+  --rs-dock-height: 72px;
+  --rs-dock-height-compact: 68px;
   --rs-sheet-max-height: 72dvh;
   --rs-canvas-padding-regular: 24px;
   --rs-canvas-padding-wide: 32px;
@@ -87,13 +90,24 @@
   --rs-color-danger-active: #8d2828;
   --rs-color-danger-surface: #fff0f0;
   --rs-color-overlay: rgba(15, 17, 21, 0.48);
-  --rs-glass-tint: rgba(255, 255, 255, 0.76);
-  --rs-glass-border: rgba(255, 255, 255, 0.72);
+  --rs-glass-tint: rgba(255, 255, 255, 0.66);
+  --rs-glass-border: rgba(255, 255, 255, 0.82);
+  --rs-glass-highlight: rgba(255, 255, 255, 0.9);
+  --rs-glass-accent: rgba(91, 108, 255, 0.24);
+  --rs-inspector-frost: rgba(246, 247, 251, 0.82);
+  --rs-inspector-frost-strong: rgba(251, 252, 255, 0.92);
+  --rs-inspector-text: #17191d;
+  --rs-inspector-text-secondary: #444a55;
+  --rs-inspector-text-muted: #68707d;
+  --rs-stage-glow-one: rgba(104, 116, 255, 0.3);
+  --rs-stage-glow-two: rgba(66, 201, 225, 0.24);
+  --rs-stage-glow-three: rgba(232, 113, 255, 0.2);
 
   /* Elevation, motion and stacking. */
   --rs-shadow-raised: 0 4px 12px rgba(23, 25, 29, 0.08);
-  --rs-shadow-overlay: 0 16px 40px rgba(23, 25, 29, 0.18);
-  --rs-shadow-preview: 0 18px 48px rgba(36, 42, 52, 0.12);
+  --rs-shadow-overlay: 0 24px 64px rgba(23, 25, 29, 0.2);
+  --rs-shadow-preview: 0 28px 72px rgba(36, 42, 52, 0.18);
+  --rs-shadow-glass: 0 16px 44px rgba(45, 52, 80, 0.15), inset 0 1px 0 var(--rs-glass-highlight);
   --rs-duration-fast: 120ms;
   --rs-duration-standard: 200ms;
   --rs-ease-standard: cubic-bezier(0.2, 0, 0, 1);
@@ -137,9 +151,20 @@
   --rs-color-overlay: rgba(0, 0, 0, 0.64);
   --rs-glass-tint: rgba(23, 26, 32, 0.78);
   --rs-glass-border: rgba(255, 255, 255, 0.14);
+  --rs-glass-highlight: rgba(255, 255, 255, 0.2);
+  --rs-glass-accent: rgba(111, 140, 255, 0.3);
+  --rs-inspector-frost: rgba(25, 29, 37, 0.88);
+  --rs-inspector-frost-strong: rgba(31, 36, 46, 0.94);
+  --rs-inspector-text: #f5f7fa;
+  --rs-inspector-text-secondary: #d1d6df;
+  --rs-inspector-text-muted: #a4acb9;
+  --rs-stage-glow-one: rgba(76, 91, 210, 0.28);
+  --rs-stage-glow-two: rgba(29, 133, 162, 0.18);
+  --rs-stage-glow-three: rgba(164, 68, 185, 0.14);
   --rs-shadow-raised: 0 4px 12px rgba(0, 0, 0, 0.24);
   --rs-shadow-overlay: 0 16px 40px rgba(0, 0, 0, 0.48);
   --rs-shadow-preview: 0 20px 56px rgba(0, 0, 0, 0.4);
+  --rs-shadow-glass: 0 20px 54px rgba(0, 0, 0, 0.38), inset 0 1px 0 var(--rs-glass-highlight);
 }
 
 @media (prefers-reduced-motion: reduce) {

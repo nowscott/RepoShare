@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex shrink-0 items-center justify-center gap-[var(--rs-space-100)] whitespace-nowrap rounded-[var(--rs-radius-medium)] text-sm font-medium transition-colors outline-none disabled:pointer-events-none disabled:border-[var(--rs-color-border-disabled)] disabled:bg-[var(--rs-color-surface-disabled)] disabled:text-[var(--rs-color-text-disabled)] [&_svg]:pointer-events-none [&_svg]:size-[var(--rs-icon-size)] [&_svg]:shrink-0 focus-visible:ring-2 focus-visible:ring-[var(--rs-color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--rs-color-surface)]',
+  'inline-flex shrink-0 items-center justify-center gap-[var(--rs-space-100)] whitespace-nowrap rounded-[var(--rs-radius-glass-inner)] text-sm font-medium transition-[background,color,border-color,transform,filter] outline-none disabled:pointer-events-none disabled:border-[var(--rs-color-border-disabled)] disabled:bg-[var(--rs-color-surface-disabled)] disabled:text-[var(--rs-color-text-disabled)] [&_svg]:pointer-events-none [&_svg]:size-[var(--rs-icon-size)] [&_svg]:shrink-0 focus-visible:ring-2 focus-visible:ring-[var(--rs-color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--rs-color-surface)]',
   {
     variants: {
       variant: {
